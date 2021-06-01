@@ -17,6 +17,8 @@ class User(db.Model):
     name = db. Column(db.String)
     email = db.Column(db.String, unique=True, nullable=False)
     password = db.Column(db.String, nullable=False)
+
+    books = db.relationship( "Book",  backref="user", viewonly=True)
     
 
     def __repr__(self):
@@ -41,11 +43,13 @@ class Book(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
     author_id = db.Column(db.Integer, db.ForeignKey('author.author_id'), nullable=False)
-    genre_id = db.Column(db.Integer, db.ForeignKey("genres.genre_id"), nullable=False)
     
 
+    
     user = db.relationship('User', backref='books')
     author = db.relationship('Author', backref='books')
+    genres = db.relationship(
+        "Genre", secondary="books_genres", backref="books")
 
 
 
@@ -62,13 +66,13 @@ class Author(db.Model):
     author_id = db.Column(db.Integer,
                         autoincrement=True,
                         primary_key=True)
-    fullname = db.Column(db.String, nullable=False)
+    full_name = db.Column(db.String, nullable=False)
 
     book_id = db.Column(db.Integer, db.ForeignKey('books.book_id'), nullable=False)
     book = db.relationship('Book', backref='author')
 
     def __repr__(self):
-        return f'<Author author_id={self.author_id} fullname={self.fullname} book_id={self.book_id}>'
+        return f'<Author author_id={self.author_id} full_name={self.full_name} book={self.book}>'
 
 
 class BookGenre(db.Model):
@@ -92,3 +96,7 @@ class Genre(db.Model):
 
     genre_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, unique=True)
+
+if __name__ == '__main__':
+    from server import app
+    # connect_to_db(app)

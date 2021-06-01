@@ -14,12 +14,17 @@ def homepage():
 
     return render_template('homepage.html')
 
-@app.route('/login')
+@app.route('/login', methods=["POST"])
 def handle_login():
     """Check input against user_id's and redirect to user library"""
 
+    return redner_template('')
 
+@app.route('/add-book',methods=["POST"])
+def add_new_book():
+    """Add new book to user library."""
 
+    return render_tamplate('')
 
 if __name__ == '__main__':
     # connect_to_db(app)
