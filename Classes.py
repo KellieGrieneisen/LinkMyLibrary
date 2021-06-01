@@ -4,7 +4,10 @@ from datetime import datetime
 db = SQLAlchemy()
 
 
+db.app = flask_app
+db.init_app(flask_app)
 
+print('Connected to the db!')
 
 class User(db.Model):
     """User info"""
@@ -43,11 +46,6 @@ class Book(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
     author_id = db.Column(db.Integer, db.ForeignKey('author.author_id'), nullable=False)
-    
-
-    
-    user = db.relationship('User', backref='books')
-    author = db.relationship('Author', backref='books')
     genres = db.relationship(
         "Genre", secondary="books_genres", backref="books")
 

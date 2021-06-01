@@ -1,0 +1,47 @@
+{% block title %}<h1>Welcome to Link My Library!</h1> {% endblock %}
+
+
+{% block body %} 
+
+<h2>“Books are the quietest and most constant of friends; <br>
+    they are the most accessible and wisest of counselors, <br>
+    and the most patient of teachers.”-Charles W. Eliot</h2>
+
+<!-- form to create user login -->
+
+
+    <form class="form-signin" method="POST">
+
+    <h2 class="form-signin-heading">Sign in to your library</h2>
+  
+    <div class="form-group">
+      <label for="email-field" class="sr-only">Email</label>
+      
+      <!-- look into class here, keep large? change? -->
+      <input type="email"
+             name="email"
+             class="form-control input-lg"
+             placeholder="Email"
+             required
+             autofocus>
+    </div>
+  
+    <div class="form-group">
+      <label for="password-field" class="sr-only">Password</label>
+      <input type="password"
+             name="password"
+             class="form-control input-lg"
+             placeholder="Password"
+             required>
+    </div>
+  <!-- btn-deafualt makes button white, chose this because of ideal future css -->
+    <button class="btn btn-lg btn-default btn-block" type="submit">Sign In
+    </button>
+  
+  </form>
+
+
+
+
+
+{% endblock %}
