@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+
+
+
+  <!-- Include any page-specific Javascript using this block. -->
+  {% block js %}
+  {% endblock %}
+
+  <link href="/static/css/site.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Include the page's content with this block. -->
+  {% block body %}
+  {% endblock %}
+</body>
+</html>
