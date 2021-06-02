@@ -41,6 +41,44 @@
   </form>
 
 
+  <form class="form-newuser" method="POST">
+
+    <h2 class="form-newuser-heading">New to Link my Library? Join the bookworms!<br>
+       Create an account here:</h2>
+    <div class="form-group">
+      <label for="user-name" class="user">What can we call you? </label>
+      <input type="text"
+             name="username"
+             class="form-control input-lg"
+             placeholder="Name or Nickname">
+    </div>
+
+
+    <div class="form-group">
+      <label for="email-field" class="new-user">Enter Email</label>
+      
+      <!-- look into class here, keep large? change? -->
+      <input type="email"
+             name="email"
+             class="form-control input-lg"
+             placeholder="nerdyworm@book.com"
+             required>
+    </div>
+  
+    <div class="form-group">
+      <label for="password-field" class="usser-pass">Create your Password</label>
+      <input type="password"
+             name="new-password"
+             class="form-control input-lg"
+             placeholder="Password"
+             required>
+    </div>
+  <!-- btn-deafualt makes button white, chose this because of ideal future css -->
+    <button class="btn btn-lg btn-default btn-block" type="submit">Create Account
+    </button>
+  
+  </form>
+
 
 
 
