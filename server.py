@@ -17,14 +17,22 @@ def homepage():
 @app.route('/login', methods=["POST"])
 def handle_login():
     """Check input against user_id's and redirect to user library"""
+    email = request.form.get('email')
+    password = request.form.get('password')
 
-    return redner_template('')
+    # user = 
 
-@app.route('/add-book',methods=["POST"])
+    return redirect('/user-library')
+
+@app.route('/add-book')
 def add_new_book():
     """Add new book to user library."""
 
-    return render_tamplate('')
+    return render_template('add_book.html')
+
+@app.route('/user-library')
+def show_library():
+    """View users library."""
 
 if __name__ == '__main__':
     # connect_to_db(app)
