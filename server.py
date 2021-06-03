@@ -70,11 +70,34 @@ def logout():
     return redirect('/login')
 
 
-@app.route('/add-book')
+@app.route('/add-book', methods=["GET","POST"])
 def add_new_book():
     """Add new book to user library."""
 
+    if request.form:
+        title = request.form.get("title")
+        summary = request.form.get("summary")
+        book_cover = request.form.get("book_cover")
+        author = request.form.get("author")
+        # genre = request.form.get("genre")
+
+        book = crud.get_book_by_title(title)
+        search_author= crud.get_book_by_author(author)
+        if book and search_author:
+            flash("You already have this book!")
+        elif search_author is None:
+            crud.create_author(author)
+            crud.create_book(title, summary, book_cover,author)
+            return redirect('/')
+        else:
+            crud.create_book(title, summary, book_cover,author)
+            return redirect('/')
+            
+        
+
     return render_template('add_book.html')
+
+
 
 @app.route('/')
 def show_library():
@@ -82,8 +105,9 @@ def show_library():
     logged_in_email = session.get("user_email")
     if logged_in_email is None:
         flash("You must log in to view your library!")
-
-    return render_template('user_library.html')
+    
+    books = crud.get_books()
+    return render_template('user_library.html',books=books,logged_in_email=logged_in_email)
 
 if __name__ == '__main__':
     connect_to_db(app)
