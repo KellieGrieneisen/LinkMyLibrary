@@ -3,7 +3,7 @@ from flask import (Flask, render_template, request, flash, session,
                    redirect)
 
 # from database import session as db_session
-from model import User, connect_to_db
+from model import User, connect_to_db, db
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 
 app = Flask(__name__)
@@ -12,6 +12,10 @@ app.secret_key = "$BooksAreCOOL$"
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+@app.before_first_request
+def create_all():
+    db.create_all()
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -45,23 +49,23 @@ def handle_login():
     flash("Oops! Something went wrong, check your login info!")    
     return redirect('/login')
 
-@app.route('/create-acount', methods=["GET"])
+@app.route('/create-acount')
 def create_new_account():
     """Create new user and add info to library database."""
-
+    
+        
     return render_template('create_account.html')
 
 @app.route('/create-acount', methods=["POST"])
 def add_new_account():
     """Create new user and add info to library database."""
-    name = request.form['username']
-    email = request.form['email']
-    password = request.form['password']
+    email = request.form.get("email")
+    name = request.form.get("username")
+    password = request.form.get("password")
     
      #check if user already exists
-    if User.query.filter_by(email=email): # if a user is found, redirect back to signup page so user can try again
+    if User.query.filter_by(email=email).first(): # if a user is found, redirect back to signup page so user can try again
         flash('Email address already exists')
-        return redirect('/create-account')
     
     new_user = User(name=name, email=email, password=password)#check in on password, hash?
     db.session.add(new_user) #add new user info to library db
@@ -94,3 +98,4 @@ def show_library():
 if __name__ == '__main__':
     connect_to_db(app)
     app.run(host='0.0.0.0', debug=True)
+    db.session.close()
