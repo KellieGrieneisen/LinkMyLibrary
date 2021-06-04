@@ -114,12 +114,27 @@ def show_library():
     """View users library."""
     logged_in_email = session.get("user_email")
     if logged_in_email is None:
-        flash("You must log in to view your library!")
+        flash("You must log in to view your tbr!")
+        return redirect('/login')
     
-       
-    books = crud.get_books_by_email(logged_in_email)
-    current_user = crud.get_username_by_email(logged_in_email)
-    return render_template('user_library.html',books=books,current_user=current_user)
+    user = crud.get_user_by_email(logged_in_email)
+    current_user_id = user.user_id
+    crud.get_books_by_user_id(current_user_id) 
+    # books = crud.get_books_by_email(logged_in_email)
+    # current_user = crud.get_username_by_email(logged_in_email)
+    # books=books,current_user=current_user)
+
+    return render_template('user_library.html')
+
+
+@app.route('/tbr')
+def show_tbr_list():
+    """View users TBR list."""
+    logged_in_email = session.get("user_email")
+    if logged_in_email is None:
+        flash("You must log in to view your tbr!")
+        return redirect('/login')
+    return render_template('user_tbr.html')
 
 if __name__ == '__main__':
     connect_to_db(app)
