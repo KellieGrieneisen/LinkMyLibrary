@@ -1,7 +1,7 @@
 {% block title %}Add New Book to Library {% endblock %}
 
 {% block body %} 
-<form action='/add-book' mathod = "POST">
+<form action='/add-book' method ="POST">
 <h2 class ="add-book-head"> What book would you like to add to your library?</h2>
 
 <div class='form'>
@@ -44,5 +44,15 @@
     </button>
 
 </form>
-
+<br>
+<br>
+<br>
+<ul>
+    {% for book in books %}
+        <li>{{book.title}}<br>By: {{book.author}}<br>Summary:{{book.summary}}</li>
+    
+    {% endfor %}
+    
+    </ul>
+<a href="/">Back to your library</a>
 {% endblock %}
