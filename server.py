@@ -11,6 +11,8 @@ app = Flask(__name__)
 app.secret_key = "$BooksAreCOOL$"
 # app.jinja_env.undefined = StrictUndefined
 
+def create_all():
+    db.create_all()
 
 @app.route('/login', methods=["GET"])
 def login():
@@ -25,10 +27,12 @@ def login():
 def handle_login():
     """Check input against user_id's and redirect to user library"""
     # username = request.form.get("username")
+    
     email = request.form.get("email")
     password = request.form.get("password")
 
     user = crud.get_user_by_email(email)
+    
     if not user or user.password != password:
         flash("Oops! Something went wrong, check your login info!")
         return redirect('/login')
@@ -55,6 +59,7 @@ def add_new_account():
     password = request.form.get("password")
 
     user = crud.get_user_by_email(email)
+    
     if user:
         flash("Email already in use. Try again.")
     else:
@@ -106,8 +111,10 @@ def show_library():
     if logged_in_email is None:
         flash("You must log in to view your library!")
     
-    books = crud.get_books()
-    return render_template('user_library.html',books=books,logged_in_email=logged_in_email)
+       
+    books = crud.get_books_by_email(logged_in_email)
+    current_user = crud.get_username_by_email(logged_in_email)
+    return render_template('user_library.html',books=books,current_user=current_user)
 
 if __name__ == '__main__':
     connect_to_db(app)
