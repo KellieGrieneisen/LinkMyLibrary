@@ -80,9 +80,10 @@ def logout():
 @app.route('/add-book')
 def add_new_book_form():
     """Add new book form."""
-              
-    books = crud.get_books()
-    return render_template('add_book.html',books=books)
+    logged_in_email = session.get("user_email")           
+    # books = crud.get_books()
+    b = crud.get_books_by_email(logged_in_email)
+    return render_template('add_book.html',b=b)
 
 @app.route('/add-book', methods=["POST"])
 def add_new_book():
@@ -104,8 +105,8 @@ def add_new_book():
     # current_user_id = user.user_id
     current_user_id = crud.get_id_by_email(logged_in_email)
     new_book= crud.create_book(title, summary, book_cover_path, full_name)
-    # book_id = new_book.book_id
-    # crud.add_book_to_user_id(current_user_id,book_id)
+    book_id = new_book.book_id
+    crud.add_book_to_user_id(current_user_id,book_id)
     return redirect('/')
 
 
@@ -119,8 +120,8 @@ def show_library():
         return redirect('/login')
     
     name = crud.get_username_by_email(logged_in_email)
-    current_user_id = crud.get_id_by_email(logged_in_email)
-    users_books = crud.get_books_by_user_id(current_user_id) 
+    # current_user = crud.get_user_by_email(logged_in_email)
+    users_books = crud.get_books_by_email(logged_in_email) 
     # books = crud.get_books_by_email(logged_in_email)
 
     return render_template('user_library.html', name=name,users_books=users_books)

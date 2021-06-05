@@ -31,14 +31,10 @@ def get_user_by_email(email):
 def add_book_to_user_id(current_user_id,book_id):
     """Connect book to user_id"""
     connection = Books_User(user_id=current_user_id,book_id=book_id)
-    all_books = Books_User.query.filter_by(connection)
-    user_bookshelf = []
+    db.session.add(connection)
+    db.session.commit()
 
-    for book in all_books:
-        B_id = book.book_id
-        book_obj = Book.query.get(B_id)
-        user_bookshelf.append(book_obj)
-    return user_bookshelf
+    return connection
 
 
 
@@ -78,11 +74,24 @@ def get_author(author):
     
 #     return user_books
 
-def get_books_by_user_id(current_user_id):
+def get_books_by_email(email):
     """Display all books assigned to current user"""
     # connection = Books_User(user_id=current_user_id)
-    
-    book_info = user.books
+    current_user = User.query.filter(User.email == email).first()
+
+    book_info = current_user.book
+
+
+    #  all_books = Books_User.query.filter_by(connection)
+   
+#    user_bookshelf = []
+
+#     for book in all_books:
+#         B_id = book.book_id
+#         book_obj = Book.query.get(B_id)
+#         user_bookshelf.append(book_obj)
+        
+#     return user_bookshelf
 
     return book_info
 
