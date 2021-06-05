@@ -1,0 +1,20 @@
+{% block title %}<h1>My Library</h1>{% endblock %}
+
+{% block body %} 
+<h2>Welcome Back {{name}}</h2>
+<br>
+<a href="/add-book">Add Books to your library!!</a>
+<ul>
+{% for book in books %}
+    <li>{{book.title}}<br>By: {{book.author}}<br>Summary:{{book.summary}}</li>
+
+{% endfor %}
+
+</ul>
+<form action="/logout" class="inline">
+    <button class="float-left submit-button" >Logout of Library</button>
+</form>
+
+
+
+{% endblock %}

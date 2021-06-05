@@ -122,8 +122,6 @@ def show_library():
     current_user_id = crud.get_id_by_email(logged_in_email)
     users_books = crud.get_books_by_user_id(current_user_id) 
     # books = crud.get_books_by_email(logged_in_email)
-  
-    # books=
 
     return render_template('user_library.html', name=name,users_books=users_books)
 
