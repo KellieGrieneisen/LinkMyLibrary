@@ -101,8 +101,6 @@ def add_new_book():
     elif search_author is None:
         crud.create_author(full_name)
     
-    # user = crud.get_user_by_email(logged_in_email)
-    # current_user_id = user.user_id
     current_user_id = crud.get_id_by_email(logged_in_email)
     new_book= crud.create_book(title, summary, book_cover_path, full_name)
     book_id = new_book.book_id
