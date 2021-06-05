@@ -32,7 +32,7 @@ def handle_login():
     password = request.form.get("password")
 
     user = crud.get_user_by_email(email)
-    print(user) # <User user_id=1, name="test">
+     # <User user_id=1, name="test">
     # user_id = user.user_id
     
     if not user or user.password != password:
@@ -100,11 +100,12 @@ def add_new_book():
     elif search_author is None:
         crud.create_author(full_name)
     
-    user = crud.get_user_by_email(logged_in_email)
-    current_user_id = user.user_id
+    # user = crud.get_user_by_email(logged_in_email)
+    # current_user_id = user.user_id
+    current_user_id = crud.get_id_by_email(logged_in_email)
     new_book= crud.create_book(title, summary, book_cover_path, full_name)
-    book_id = new_book.book_id
-    crud.add_book_to_user_id(current_user_id,book_id)
+    # book_id = new_book.book_id
+    # crud.add_book_to_user_id(current_user_id,book_id)
     return redirect('/')
 
 
@@ -117,14 +118,14 @@ def show_library():
         flash("You must log in to view your tbr!")
         return redirect('/login')
     
-    user = crud.get_user_by_email(logged_in_email)
-    current_user_id = user.user_id
-    crud.get_books_by_user_id(current_user_id) 
+    name = crud.get_username_by_email(logged_in_email)
+    current_user_id = crud.get_id_by_email(logged_in_email)
+    users_books = crud.get_books_by_user_id(current_user_id) 
     # books = crud.get_books_by_email(logged_in_email)
-    # current_user = crud.get_username_by_email(logged_in_email)
-    # books=books,current_user=current_user)
+  
+    # books=
 
-    return render_template('user_library.html')
+    return render_template('user_library.html', name=name,users_books=users_books)
 
 
 @app.route('/tbr')
