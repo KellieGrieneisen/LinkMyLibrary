@@ -2,6 +2,8 @@
 from flask import (Flask, render_template, request, flash, session,
                    redirect)
 import crud
+import requests
+import os
 # from database import session as db_session
 from model import connect_to_db, db
 from jinja2 import StrictUndefined
@@ -10,6 +12,9 @@ from jinja2 import StrictUndefined
 app = Flask(__name__)
 app.secret_key = "$BooksAreCOOL$"
 # app.jinja_env.undefined = StrictUndefined
+
+# API_KEY = os.environ['GOOGLE_BOOKS_API_KEY']
+
 
 def create_all():
     db.create_all()
@@ -32,8 +37,6 @@ def handle_login():
     password = request.form.get("password")
 
     user = crud.get_user_by_email(email)
-     # <User user_id=1, name="test">
-    # user_id = user.user_id
     
     if not user or user.password != password:
         flash("Oops! Something went wrong, check your login info!")
@@ -81,9 +84,9 @@ def logout():
 def add_new_book_form():
     """Add new book form."""
     logged_in_email = session.get("user_email")           
-    # books = crud.get_books()
-    b = crud.get_books_by_email(logged_in_email)
-    return render_template('add_book.html',b=b)
+    books = crud.get_books()
+    # b = crud.get_books_by_email(logged_in_email)
+    return render_template('add_book.html',books=books)
 
 @app.route('/add-book', methods=["POST"])
 def add_new_book():
@@ -108,6 +111,37 @@ def add_new_book():
     return redirect('/')
 
 
+@app.route('/find-book')   
+def show_book_form():
+    """Book search form."""
+
+    return render_template('search_book.html') 
+
+@app.route('/find-book/search')
+def search_for_book():
+    """Search for Books matching description in database."""
+    title = request.args.get('title', '')
+    author = request.args.get('author', '')
+
+    url = 'https://www.googleapis.com/books/v1/volumes'
+
+    payload ={
+        'apikey': API_KEY
+        'q': title or author,
+        'printType': books
+        
+
+    }
+
+
+    response = requests.get(url, params=payload)
+    data = response.json()
+    for idx in range(len(data['items'])):
+
+        book = data['items'][idx]['volumeInfo']
+        return book
+    
+
 
 @app.route('/')
 def show_library():
@@ -118,9 +152,8 @@ def show_library():
         return redirect('/login')
     
     name = crud.get_username_by_email(logged_in_email)
-    # current_user = crud.get_user_by_email(logged_in_email)
     users_books = crud.get_books_by_email(logged_in_email) 
-    # books = crud.get_books_by_email(logged_in_email)
+    
 
     return render_template('user_library.html', name=name,users_books=users_books)
 
@@ -133,6 +166,8 @@ def show_tbr_list():
         flash("You must log in to view your tbr!")
         return redirect('/login')
     return render_template('user_tbr.html')
+
+
 
 if __name__ == '__main__':
     connect_to_db(app)

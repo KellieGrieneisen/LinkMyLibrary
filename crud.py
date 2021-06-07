@@ -82,7 +82,7 @@ def get_books_by_email(email):
     book_info = current_user.book
 
 
-    #  all_books = Books_User.query.filter_by(connection)
+#  all_books = Books_User.query.filter_by(connection)
    
 #    user_bookshelf = []
 
