@@ -126,20 +126,33 @@ def search_for_book():
     url = 'https://www.googleapis.com/books/v1/volumes'
 
     payload ={
-        'apikey': API_KEY
+        'apikey': API_KEY,
         'q': title or author,
         'printType': books
-        
-
     }
 
-
+    
     response = requests.get(url, params=payload)
     data = response.json()
     for idx in range(len(data['items'])):
 
-        book = data['items'][idx]['volumeInfo']
-        return book
+        books = data['items'][idx]['volumeInfo']
+        return books
+
+    return render_template("book_search_results.html", books=books)
+
+@app.route('/bookinfo/<id>')
+def show_book_info(id):
+    """Display specific book information filtered by book ID."""
+    
+    url = f'https://www.googleapis.com/books/v1/volumes/{id}'
+    payload = {'apikey': API_KEY}
+    response = requests.get(url, params=payload)
+    data = response.json()
+
+    
+
+
     
 
 
