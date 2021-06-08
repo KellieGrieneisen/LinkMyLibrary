@@ -4,6 +4,7 @@ from flask import (Flask, render_template, request, flash, session,
 import crud
 import requests
 import os
+import json
 # from database import session as db_session
 from model import connect_to_db, db
 from jinja2 import StrictUndefined
@@ -11,9 +12,11 @@ from jinja2 import StrictUndefined
 
 app = Flask(__name__)
 app.secret_key = "$BooksAreCOOL$"
-# app.jinja_env.undefined = StrictUndefined
+app.jinja_env.undefined = StrictUndefined
 
-# API_KEY = os.environ['GOOGLE_BOOKS_API_KEY']
+os.system("source ./projectInfo/secrets.sh") 
+API_KEY = os.environ['GOOGLEBOOKS_API_KEY']
+
 
 
 def create_all():
@@ -117,40 +120,42 @@ def show_book_form():
 
     return render_template('search_book.html') 
 
-@app.route('/find-book/search')
+@app.route('/find-book', methods=["POST"])
 def search_for_book():
-    """Search for Books matching description in database."""
-    title = request.args.get('title', '')
-    author = request.args.get('author', '')
+    """Search for Books matching description in Google Books."""
+    title = request.form.get('title', '')
+    author = request.form.get('author', '')
 
     url = 'https://www.googleapis.com/books/v1/volumes'
-
+    
     payload ={
         'apikey': API_KEY,
-        'q': title or author,
-        'printType': books
+        'q': title
+        # 'printType': books
     }
 
     
     response = requests.get(url, params=payload)
     data = response.json()
+   
     for idx in range(len(data['items'])):
 
         books = data['items'][idx]['volumeInfo']
-        return books
+        
 
-    return render_template("book_search_results.html", books=books)
+    return render_template("book_search_results.html", pformat=pformat,data=data,books=books)
 
-@app.route('/bookinfo/<id>')
-def show_book_info(id):
+@app.route('/bookinfo/<idx>')
+def show_book_info(idx):
     """Display specific book information filtered by book ID."""
     
-    url = f'https://www.googleapis.com/books/v1/volumes/{id}'
+    url = f'https://www.googleapis.com/books/v1/volumes/{idx}'
     payload = {'apikey': API_KEY}
     response = requests.get(url, params=payload)
     data = response.json()
+    title = data['items'][idx]['volumeInfo']['title']
 
-    
+
 
 
     

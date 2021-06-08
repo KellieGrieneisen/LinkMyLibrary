@@ -1,5 +1,16 @@
 {% extends 'base.html' %} 
 {% block title %}Book results{% endblock %}
  
-{% block body %}
 
+
+
+{% block body %}
+<pre>{{ pformat(data) }}</pre>
+{% for book in books %}
+
+    {{ book['title'] }}<br><br>Summary:{{ book['description'] }}
+   
+{% endfor %}
+
+{% endblock %}
+<!-- By: {{ book['authors'][0] }} -->

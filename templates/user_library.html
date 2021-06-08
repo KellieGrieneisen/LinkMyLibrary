@@ -3,7 +3,7 @@
 {% block body %} 
 <h2>Welcome Back {{name}}</h2>
 <br>
-<a href="/add-book">Add Books to your library!!</a>
+<a href="/find-book">Add Books to your library!!</a>
 <ul>
 {% for book in users_books %}
     <li>{{book.title}}<br>By: {{book.author}}<br>Summary:{{book.summary}}</li>
