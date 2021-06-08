@@ -5,12 +5,13 @@
 
 
 {% block body %}
-<pre>{{ pformat(data) }}</pre>
-{% for book in books %}
 
-    {{ book['title'] }}<br><br>Summary:{{ book['description'] }}
-   
-{% endfor %}
+
+    <img src={{book_cover}}><br>
+    Title:{{ title}}<br><br>
+    By: {{ author}}<br>
+    Summary:{{ summary}}<br><br>
+
+
 
 {% endblock %}
-<!-- By: {{ book['authors'][0] }} -->

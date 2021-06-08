@@ -130,7 +130,7 @@ def search_for_book():
     
     payload ={
         'apikey': API_KEY,
-        'q': title
+        'q': title 
         # 'printType': books
     }
 
@@ -138,12 +138,22 @@ def search_for_book():
     response = requests.get(url, params=payload)
     data = response.json()
    
-    for idx in range(len(data['items'])):
+    # for idx in range(len(data['items'])):
 
-        books = data['items'][idx]['volumeInfo']
+    #     books = data['items'][idx]['volumeInfo']
+    #     return books
+    book = data['items'][0]['volumeInfo']
+    
+
+      
+    title = book['title']
+    author = book['authors'][0]
+    summary = book['description']
+    book_cover = book['imageLinks']['thumbnail']
         
 
-    return render_template("book_search_results.html", pformat=pformat,data=data,books=books)
+    return render_template("book_search_results.html",title=title, author=author,
+    summary=summary,book_cover=book_cover)
 
 @app.route('/bookinfo/<idx>')
 def show_book_info(idx):
