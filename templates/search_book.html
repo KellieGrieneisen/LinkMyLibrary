@@ -1,23 +1,17 @@
 {% extends 'base.html' %} 
-{% block title %}<h1>Search for New Book!</h1>{% endblock %}
+{% block title %}Search{% endblock %}
 
 {% block body %} 
+<h1>Search for a new book...</h1>
 <form action='/find-book' class="searchbook" method="POST">
 <h2 class ="add-book-head"> What book are you looking for?</h2>
 
 <div class='form'>
-    <label for="book-title" >Title</label>
-    <input type="text" name="title" class="form-control">
+    <label for="book-title" >Title or Author</label>
+    <input type="text" name="book-search" class="form-control">
 
 </div>
 
-
-
-<div class='form'>
-    <label for="book-author" >Author</label>
-    <input type="text" name="author" class="form-control">
-
-</div>
 
 
 <button class="btn btn-lg btn-default btn-block" type="submit" value="search">
@@ -25,4 +19,5 @@
 
 </form>
 
+<a href="/">Back to your library</a>
 {% endblock %}

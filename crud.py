@@ -39,10 +39,10 @@ def add_book_to_user_id(current_user_id,book_id):
 
 
 
-def create_book(title, summary, book_cover_path, full_name):
+def create_book(title, summary, book_cover, author):
     """Create and return book to user library."""
-    book_author = Author(full_name=full_name)
-    new_book = Book(title=title, summary=summary, book_cover_path=book_cover_path)
+    book_author = Author(full_name=author)
+    new_book = Book(title=title, summary=summary, book_cover_path=book_cover)
     book_author.books.append(new_book)
 
     db.session.add(new_book)

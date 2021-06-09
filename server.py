@@ -123,48 +123,84 @@ def show_book_form():
 @app.route('/find-book', methods=["POST"])
 def search_for_book():
     """Search for Books matching description in Google Books."""
-    title = request.form.get('title', '')
-    author = request.form.get('author', '')
+    search = request.form.get('book-search', '')
+  
 
     url = 'https://www.googleapis.com/books/v1/volumes'
     
     payload ={
         'apikey': API_KEY,
-        'q': title 
-        # 'printType': books
+        'maxResults':10,
+        'q': search
     }
-
-    
     response = requests.get(url, params=payload)
     data = response.json()
    
-    # for idx in range(len(data['items'])):
-
-    #     books = data['items'][idx]['volumeInfo']
-    #     return books
-    book = data['items'][0]['volumeInfo']
-    
-
-      
-    title = book['title']
-    author = book['authors'][0]
-    summary = book['description']
-    book_cover = book['imageLinks']['thumbnail']
+   
         
-
-    return render_template("book_search_results.html",title=title, author=author,
-    summary=summary,book_cover=book_cover)
-
-@app.route('/bookinfo/<idx>')
-def show_book_info(idx):
-    """Display specific book information filtered by book ID."""
+   
+    # book = data['items'][0]['volumeInfo']
+    # title = book['title']
+    # author = book['authors'][0]
+    # summary = book['description']
+    # book_cover = book['imageLinks']['thumbnail']
     
-    url = f'https://www.googleapis.com/books/v1/volumes/{idx}'
-    payload = {'apikey': API_KEY}
+
+
+    # logged_in_email = session.get("user_email")    
+    # current_user_id = crud.get_id_by_email(logged_in_email)
+    # new_book= crud.create_book(title, summary, book_cover, author)
+    # book_id = new_book.book_id
+    # crud.add_book_to_user_id(current_user_id,book_id)    
+   
+    return render_template("book_search_results.html",books=data['items'], id=data['items'][id])
+
+@app.route('/add-searched-book', methods=["GET","POST"])
+def add_searched_book():
+    logged_in_email = session.get("user_email")    
+    current_user_id = crud.get_id_by_email(logged_in_email)
+
+    get_book = request.args.get('books')
+    if get_book == "Add":
+        check_book = crud.get_book_by_title(title)
+        search_author= crud.get_author(full_name)
+        if check_book:
+            flash("You already have this book!")
+        elif search_author is None:
+            crud.create_author(full_name)
+        new_book= crud.create_book(title, summary, book_cover, author)
+        book_id = new_book.book_id
+        crud.add_book_to_user_id(current_user_id,book_id) 
+    
+    url = f'https://www.googleapis.com/books/v1/volumes/{id}'
+    payload ={
+        'apikey': API_KEY,
+    }
     response = requests.get(url, params=payload)
     data = response.json()
-    title = data['items'][idx]['volumeInfo']['title']
+   
+    title = book['volumeInfo']['title']
+    author = book['volumeInfo']['authors'][0]
+    summary = book['volumeInfo']['description']
+    book_cover = book['volumeInfo']['imageLinks']['thumbnail']
+ 
+   
+    return redirect('/find-book')
 
+# @app.route('/bookinfo/<book>')
+# def show_book_info(book):
+#     """Display specific book information filtered by book ID."""
+    
+#     url = f'https://www.googleapis.com/books/v1/volumes/{book}'
+#     payload = {'apikey': API_KEY}
+#     response = requests.get(url, params=payload)
+#     data = response.json()
+#     # title = data['title']
+#     # author = data['authors'][0]
+#     # summary = data['description']
+#     # book_cover = data['imageLinks']['thumbnail']
+  
+#     return render_template('book-info.html', data=data)
 
 
 
