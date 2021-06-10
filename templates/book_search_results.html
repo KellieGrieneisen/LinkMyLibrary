@@ -7,6 +7,7 @@
 {% block body %}
 <form action="/add-searched-book" class="book-results" method="POST">
 {% for book in books %}
+
    <input type="hidden" name="book_cover" 
    value="{{ book['volumeInfo']['imageLinks']['thumbnail'] }}">
 
@@ -22,8 +23,10 @@
 
    <input type="hidden" name="summary" value="{{ book['volumeInfo']['description'] }}">
    Summary: {{ book['volumeInfo']['description'] }}
-<input type="checkbox" name="books" ><br>
-{% endfor %}    
+   
+<input type="checkbox" name="addbooks" value="{{book['id']}}"><br>
+   
+{% endfor %} 
 <button class="float-left submit-button" >Add Book to library</button><br>
 </form>    
 
