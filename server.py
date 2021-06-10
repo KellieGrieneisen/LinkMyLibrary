@@ -12,7 +12,7 @@ from jinja2 import StrictUndefined
 
 app = Flask(__name__)
 app.secret_key = "$BooksAreCOOL$"
-app.jinja_env.undefined = StrictUndefined
+# app.jinja_env.undefined = StrictUndefined
 
 os.system("source ./projectInfo/secrets.sh") 
 API_KEY = os.environ['GOOGLEBOOKS_API_KEY']
@@ -135,7 +135,7 @@ def search_for_book():
     }
     response = requests.get(url, params=payload)
     data = response.json()
-   
+    return render_template("book_search_results.html",books=data['items'])
    
         
    
@@ -153,36 +153,28 @@ def search_for_book():
     # book_id = new_book.book_id
     # crud.add_book_to_user_id(current_user_id,book_id)    
    
-    return render_template("book_search_results.html",books=data['items'], id=data['items'][id])
+    
 
-@app.route('/add-searched-book', methods=["GET","POST"])
+@app.route('/add-searched-book', methods=["POST"])
 def add_searched_book():
     logged_in_email = session.get("user_email")    
     current_user_id = crud.get_id_by_email(logged_in_email)
-
-    get_book = request.args.get('books')
-    if get_book == "Add":
-        check_book = crud.get_book_by_title(title)
-        search_author= crud.get_author(full_name)
-        if check_book:
-            flash("You already have this book!")
-        elif search_author is None:
-            crud.create_author(full_name)
-        new_book= crud.create_book(title, summary, book_cover, author)
-        book_id = new_book.book_id
-        crud.add_book_to_user_id(current_user_id,book_id) 
     
-    url = f'https://www.googleapis.com/books/v1/volumes/{id}'
-    payload ={
-        'apikey': API_KEY,
-    }
-    response = requests.get(url, params=payload)
-    data = response.json()
-   
-    title = book['volumeInfo']['title']
-    author = book['volumeInfo']['authors'][0]
-    summary = book['volumeInfo']['description']
-    book_cover = book['volumeInfo']['imageLinks']['thumbnail']
+    # get_book = request.args.get('books')
+    # request.args.get('books')
+    title = request.form.get("title")
+    author = request.form.get("author")
+    summary = request.form.get("summary")
+    book_cover = request.form.get("book_cover")
+    check_book = crud.get_book_by_title(title)
+    search_author= crud.get_author(author)
+    if check_book == title:
+        flash("You already have this book!")
+    elif search_author != author:
+        crud.create_author(author)
+    new_book= crud.create_book(title, summary, book_cover, author)
+    book_id = new_book.book_id
+    crud.add_book_to_user_id(current_user_id,book_id)
  
    
     return redirect('/find-book')
