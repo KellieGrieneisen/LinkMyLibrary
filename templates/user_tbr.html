@@ -1,15 +1,15 @@
 {% block title %}<h1>My To Be Read</h1>{% endblock %}
 
 {% block body %} 
-<h2>Welcome Back {{current_user}}</h2>
+<h2>{{name}}'s TBR</h2>
 <br>
-<a href="/user-tbr">Add Books to your tbr!!</a>
+
 <ul>
 {% for book in books %}
-    <li>{{book.title}}<br>By: {{book.author}}<br>Summary:{{book.summary}}</li>
+    <li>{{book.title}}<br>By: {{book.author}}<br></li>
 
 {% endfor %}
 
 </ul><br>
 <a href="/">Back to your library</a>
-{% end_block %}
+{% endblock %}

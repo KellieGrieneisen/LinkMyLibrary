@@ -70,6 +70,7 @@ class Book(db.Model):
     title = db.Column(db.String(50))
     summary = db.Column(db.Text)
     book_cover_path = db.Column(db.String)
+    have_read = db.Column(db.BOOLEAN, default= True)
     
    
     # user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))

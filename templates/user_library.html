@@ -1,18 +1,29 @@
 {% extends 'base.html' %} 
 {% block title %}My Library{% endblock %}
 
-{% block body %} 
+{% block body %}
+<script
+      src="http://code.jquery.com/jquery-3.5.1.js"
+      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+      crossorigin="anonymous"></script> 
 <h2>Welcome Back {{name}}</h2>
 <br>
-<a href="/find-book">Add Books to your library!!</a>
+<a href="/find-book">Add Books to your library!!</a><br>
+<a href="/tbr">View To Be Read List</a>
 <ul>
-<!-- <form action="/tbr" class="book-results" method="POST"></form> -->
-{% for book in users_books %}
+{% if users_books %}
+<form action="/" class="read-status" method="POST"></form>
+    {% for book in users_books %}   
     
-    <li><img src={{book.book_cover_path}}><br>{{book.title}}<br>By: {{book.author}}<br>Summary:{{book.summary}}</li>
-
-{% endfor %}
-
+    <li><img src={{book.book_cover_path}}><br>{{book.title}}<br>By: {{book.author}}<br></li>
+    <input type="radio" name="status" id="read" value="read">
+    <label>Have read already</label>
+    <br>
+  
+    <input type="radio" name="status" id="unread" value="unread">
+    <label>Need to read</label><br><br>
+    {% endfor %}
+{% endif %}
 </ul>
 <form action="/logout" class="inline">
     <button class="float-left submit-button" >Logout of Library</button>
@@ -20,4 +31,7 @@
 
 
 
+{% endblock %}
+{% block js %}
+<script src="/static/js/user_library.jsx" ></script>
 {% endblock %}

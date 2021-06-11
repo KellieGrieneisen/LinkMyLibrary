@@ -83,35 +83,35 @@ def logout():
     return redirect('/login')
 
 
-@app.route('/add-book')
-def add_new_book_form():
-    """Add new book form."""
-    logged_in_email = session.get("user_email")           
-    books = crud.get_books()
-    # b = crud.get_books_by_email(logged_in_email)
-    return render_template('add_book.html',books=books)
+# @app.route('/add-book')
+# def add_new_book_form():
+#     """Add new book form."""
+#     logged_in_email = session.get("user_email")           
+#     books = crud.get_books()
+#     # b = crud.get_books_by_email(logged_in_email)
+#     return render_template('add_book.html',books=books)
 
-@app.route('/add-book', methods=["POST"])
-def add_new_book():
-    logged_in_email = session.get("user_email")
-    title = request.form.get("title")
-    summary = request.form.get("summary")
-    book_cover_path = request.form.get("book_cover")
-    full_name = request.form.get("author")
-        # genre = request.form.get("genre")
+# @app.route('/add-book', methods=["POST"])
+# def add_new_book():
+#     logged_in_email = session.get("user_email")
+#     title = request.form.get("title")
+#     summary = request.form.get("summary")
+#     book_cover_path = request.form.get("book_cover")
+#     full_name = request.form.get("author")
+#         # genre = request.form.get("genre")
 
-    book = crud.get_book_by_title(title)
-    search_author= crud.get_author(full_name)
-    if book:
-        flash("You already have this book!")
-    elif search_author is None:
-        crud.create_author(full_name)
+#     book = crud.get_book_by_title(title)
+#     search_author= crud.get_author(full_name)
+#     if book:
+#         flash("You already have this book!")
+#     elif search_author is None:
+#         crud.create_author(full_name)
     
-    current_user_id = crud.get_id_by_email(logged_in_email)
-    new_book= crud.create_book(title, summary, book_cover_path, full_name)
-    book_id = new_book.book_id
-    crud.add_book_to_user_id(current_user_id,book_id)
-    return redirect('/')
+#     current_user_id = crud.get_id_by_email(logged_in_email)
+#     new_book= crud.create_book(title, summary, book_cover_path, full_name)
+#     book_id = new_book.book_id
+#     crud.add_book_to_user_id(current_user_id,book_id)
+#     return redirect('/')
 
 
 @app.route('/find-book')   
@@ -216,39 +216,35 @@ def add_searched_book():
    
     return redirect('/find-book')
 
-# @app.route('/bookinfo/<book>')
-# def show_book_info(book):
-#     """Display specific book information filtered by book ID."""
-    
-#     url = f'https://www.googleapis.com/books/v1/volumes/{book}'
-#     payload = {'apikey': API_KEY}
-#     response = requests.get(url, params=payload)
-#     data = response.json()
-#     # title = data['title']
-#     # author = data['authors'][0]
-#     # summary = data['description']
-#     # book_cover = data['imageLinks']['thumbnail']
-  
-#     return render_template('book-info.html', data=data)
-
-
-
-    
 
 
 @app.route('/')
 def show_library():
     """View users library."""
     logged_in_email = session.get("user_email")
+    if crud.get_users is None:
+        return redirect('/login')
     if logged_in_email is None:
         flash("You must log in to view your tbr!")
         return redirect('/login')
     
+    
     name = crud.get_username_by_email(logged_in_email)
     users_books = crud.get_books_by_email(logged_in_email) 
+    print(users_books)
+    print('**************')
+    read_status = request.form.get('status')
     
+    for book in users_books:
+        book_id = book.book_id
+        if read_status == "unread":
+            crud.update_reading_stats(book_id)
+        
 
-    return render_template('user_library.html', name=name,users_books=users_books)
+
+
+    
+    return render_template('user_library.html', name=name, users_books=users_books)
 
 
 @app.route('/tbr')
@@ -258,7 +254,9 @@ def show_tbr_list():
     if logged_in_email is None:
         flash("You must log in to view your tbr!")
         return redirect('/login')
-    return render_template('user_tbr.html')
+    name = crud.get_username_by_email(logged_in_email)
+    
+    return render_template('user_tbr.html',name=name)
 
 
 

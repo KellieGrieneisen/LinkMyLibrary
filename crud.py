@@ -81,19 +81,16 @@ def get_books_by_email(email):
 
     book_info = current_user.book
 
-
-#  all_books = Books_User.query.filter_by(connection)
-   
-#    user_bookshelf = []
-
-#     for book in all_books:
-#         B_id = book.book_id
-#         book_obj = Book.query.get(B_id)
-#         user_bookshelf.append(book_obj)
-        
-#     return user_bookshelf
-
     return book_info
+
+
+def update_reading_stats(book_id):
+    update_status = Book.query.filter_by(book_id=book_id).first()
+    update_status.have_read = False
+    db.session.add(update_status)
+    db.session.commit()
+    return update_status
+   
 
 def get_username_by_email(email):
     current_user = User.query.filter_by(email = email).first()
