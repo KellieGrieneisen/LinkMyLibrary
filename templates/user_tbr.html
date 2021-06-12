@@ -5,8 +5,8 @@
 <br>
 
 <ul>
-{% for book in books %}
-    <li>{{book.title}}<br>By: {{book.author}}<br></li>
+{% for book in tbr_list %}
+    <li><img src={{book.book_cover_path}}><br>{{book.title}}<br>By: {{book.author}}<br></li>
 
 {% endfor %}
 

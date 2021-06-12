@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin
+
 from datetime import datetime
 
 db = SQLAlchemy()
@@ -14,7 +14,7 @@ def connect_to_db(flask_app, db_uri='postgresql:///library', echo=True):
 
     print('Connected to the db!')
 
-class User(db.Model,UserMixin):
+class User(db.Model):
     """User info"""
 
     __tablename__ = 'users'

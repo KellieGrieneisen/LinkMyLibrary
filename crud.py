@@ -113,3 +113,8 @@ def get_books():
     """Return all books."""
 
     return Book.query.all()
+
+def get_unread_books():
+    """Return all books where have_read is False."""
+    books_unread = Book.query.filter(Book.have_read == False).all()
+    return books_unread

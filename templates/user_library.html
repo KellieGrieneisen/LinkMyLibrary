@@ -1,37 +1,47 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 {% block title %}My Library{% endblock %}
 
 {% block body %}
-<script
-      src="http://code.jquery.com/jquery-3.5.1.js"
-      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-      crossorigin="anonymous"></script> 
+<script src="http://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+
 <h2>Welcome Back {{name}}</h2>
+
 <br>
 <a href="/find-book">Add Books to your library!!</a><br>
 <a href="/tbr">View To Be Read List</a>
+
 <ul>
-{% if users_books %}
-<form action="/" class="read-status" method="POST"></form>
-    {% for book in users_books %}   
-    
-    <li><img src={{book.book_cover_path}}><br>{{book.title}}<br>By: {{book.author}}<br></li>
-    <input type="radio" name="status" id="read" value="read">
-    <label>Have read already</label>
-    <br>
-  
-    <input type="radio" name="status" id="unread" value="unread">
-    <label>Need to read</label><br><br>
+  {% if users_books %}
+    {% for book in users_books %}
+
+      <li>
+        <img src={{book.book_cover_path}}>
+        <br>{{book.title}}<br>
+        By: {{book.author}}<br>
+      </li>
+
+      <span class="tbr-add">
+        Add to TBR
+        <input
+          class="read"
+          type="checkbox"
+          name="update-status"
+          data-book-id="{{ book.book_id }}"
+          {% if book.have_read %}checked{% endif %}
+        />
+      </span>
     {% endfor %}
-{% endif %}
+
+  {% endif %}
 </ul>
+
 <form action="/logout" class="inline">
-    <button class="float-left submit-button" >Logout of Library</button>
+  <button class="float-left submit-button">Logout of Library</button>
 </form>
 
-
-
 {% endblock %}
+
 {% block js %}
-<script src="/static/js/user_library.jsx" ></script>
+<script src="/static/js/user_library.js"></script>
 {% endblock %}

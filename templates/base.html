@@ -3,11 +3,10 @@
 <head>
   <title>{% block title %}{% endblock %}</title>
 
-
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
   <!-- Include any page-specific Javascript using this block. -->
-  {% block js %}
-  {% endblock %}
+  
 
   <!-- <link href="/static/css/app_design.css" rel="stylesheet"> -->
 </head>
@@ -15,6 +14,8 @@
 
   <!-- Include the page's content with this block. -->
   {% block body %}
+  {% endblock %}
+  {% block js %}
   {% endblock %}
 </body>
 </html>

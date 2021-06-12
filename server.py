@@ -6,7 +6,7 @@ import requests
 import os
 import json
 # from database import session as db_session
-from model import connect_to_db, db
+from model import connect_to_db, db, Book
 from jinja2 import StrictUndefined
 
 
@@ -218,7 +218,7 @@ def add_searched_book():
 
 
 
-@app.route('/')
+@app.route('/', methods=["GET","POST"])
 def show_library():
     """View users library."""
     logged_in_email = session.get("user_email")
@@ -233,19 +233,63 @@ def show_library():
     users_books = crud.get_books_by_email(logged_in_email) 
     print(users_books)
     print('**************')
-    read_status = request.form.get('status')
+ 
+ 
+    if request.method == 'POST':
+        read_status = request.form.getlist('update-status')
+        print(read_status)
     
-    for book in users_books:
-        book_id = book.book_id
-        if read_status == "unread":
-            crud.update_reading_stats(book_id)
+        for book in users_books:
+            book_id = book.book_id 
+
+            for stats in read_status: 
+                print(stats)
+                if stats == "True":
+                    print(book.title)
+                    crud.update_reading_stats(book_id)
         
+        return redirect('/tbr')
 
-
-
-    
+        
     return render_template('user_library.html', name=name, users_books=users_books)
 
+
+@app.route('/set-read-status/<book_id>', methods=["POST"])
+def set_book(book_id):
+    """Set book status as true or false"""
+    #get book by book id(query)
+    book = Book.query.get(book_id)
+
+    book.have_read = not book.have_read
+    
+    #get book status from request.form
+    # read_status = request.form.get('status')
+  
+    # if read_status == "True":
+    #     book_stat = False
+    #     db.session.add(book_stat)
+    #     db.session.commit()
+    # elif read_status =="False":
+    #     book_stat = True
+    #db.seesion.add and commit
+
+    db.session.add(book)
+    db.session.commit()
+
+    book_info = {
+
+            'book_id': book_id,
+            'have_read': book.have_read
+        }
+    #return jsonify dictionary
+    # {
+
+        #boook attributes: 
+
+    # }
+
+    return book_info
+    
 
 @app.route('/tbr')
 def show_tbr_list():
@@ -255,8 +299,9 @@ def show_tbr_list():
         flash("You must log in to view your tbr!")
         return redirect('/login')
     name = crud.get_username_by_email(logged_in_email)
+    tbr_list = crud.get_unread_books()
     
-    return render_template('user_tbr.html',name=name)
+    return render_template('user_tbr.html',name=name,tbr_list=tbr_list)
 
 
 
