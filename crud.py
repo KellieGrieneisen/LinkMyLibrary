@@ -20,9 +20,6 @@ def get_users():
     return User.query.all()
 
 
-
-
-
 def get_user_by_email(email):
     """Return a user by email."""
 
@@ -68,11 +65,6 @@ def get_author(author):
 
     return Author.query.filter(Author.full_name==author).first()
 
-# def get_books_by_email(logged_in_email):
-#     current_user = User.query.filter_by(logged_in_email = email).first()
-#     user_books = current_user.books
-    
-#     return user_books
 
 def get_books_by_email(email):
     """Display all books assigned to current user"""
@@ -94,6 +86,8 @@ def update_reading_stats(book_id):
 
 def get_username_by_email(email):
     current_user = User.query.filter_by(email = email).first()
+    #grabbing users name from logged in email 
+    # to give customized experience
     user_name = current_user.name
 
     return user_name
@@ -104,17 +98,23 @@ def get_id_by_email(email):
 
     return u_id
 
-# def get_author_by_author_id(author_id):
-#     """Return Author ID"""
-
-#     return Author.query.filter(Author.author_id == )
 
 def get_books():
     """Return all books."""
 
     return Book.query.all()
 
-def get_unread_books():
-    """Return all books where have_read is False."""
-    books_unread = Book.query.filter(Book.have_read == False).all()
+def get_unread_books(user_id):
+    """Return all books in users library where have_read is False."""
+    user = User.query.filter_by(user_id=user_id).first()
+    #list to hold books user has not yet read
+    books_unread =[]
+    for book in user.book:
+        #iterate through users books and select books 
+        #with a bollenvalue of false for have_read
+        if book.have_read ==False:
+            #add book to unread book list
+            books_unread.append(book)
+    
+    #return book list to user for tbr list
     return books_unread

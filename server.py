@@ -299,7 +299,8 @@ def show_tbr_list():
         flash("You must log in to view your tbr!")
         return redirect('/login')
     name = crud.get_username_by_email(logged_in_email)
-    tbr_list = crud.get_unread_books()
+    user_id = crud.get_id_by_email(logged_in_email)
+    tbr_list = crud.get_unread_books(user_id)
     
     return render_template('user_tbr.html',name=name,tbr_list=tbr_list)
 
