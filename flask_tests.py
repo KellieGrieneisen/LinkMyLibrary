@@ -50,9 +50,7 @@ class FlaskTests(TestCase):
       self.assertEqual(res.status_code, 200)
       self.assertEqual(flask.session['email'], 'tester@email.com')
 
-  
-
-      
+   
   def test_homepage(self):
     """Test user homepage."""
     
@@ -66,6 +64,32 @@ class FlaskTests(TestCase):
     self.assertEqual(res.status_code, 200)
     self.assertIn(b'<h1>Welcome to Link My Library!</h1>', res.data)
     # self.assertEqual(flask.session['email'], None)
+
+  def test_registration_route(self):
+    """Test /user route displays correct information."""
+    result = self.client.get('/user',follow_redirects=True)
+
+    self.assertIn(b'<h2 class="form-newuser-heading">Create an account here:</h2>', result.data)
+
+  def test_registration_fields(self):
+    """Test all registration fields are filled out and 
+      correctly formatted."""
+    result = self.client.post("/user",
+                              data={"name":"Baloonicorn","email": "tester@email.com", "password": "enterLib2"},
+                              follow_redirects=True)
+    self.assertIsNotNone('email')
+    self.assertIsNotNone('password')
+    # self.assertIn('@' , result.data['email'])
+    # TypeError: byte indices must be integers or slices, not str
+
+  def test_reg_saved_to_db(self):
+    """Test that new user data is saved to db."""
+    result = self.client.post("/user",
+                              data={"name":"Baloonicorn","email": "tester@email.com", "password": "enterLib2"},
+                              follow_redirects=True)
+    
+
+
 
   
 
