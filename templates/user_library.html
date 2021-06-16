@@ -8,8 +8,9 @@
 <h2>Welcome Back {{name}}</h2>
 
 <br>
-<a href="/find-book">Add Books to your library!!</a><br>
+<a href="/find-book">Add Books to your library!</a><br>
 <a href="/tbr">View To Be Read List</a>
+<a href="/genres">View Genres in this Library</a>
 
 <ul>
   {% if users_books %}
@@ -19,6 +20,9 @@
         <img src={{book.book_cover_path}}>
         <br>{{book.title}}<br>
         By: {{book.author}}<br>
+        {% for genre in book.genres%}
+        {{genre.name}}
+        {% endfor %}
       </li>
 
       <span class="tbr-add">

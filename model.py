@@ -80,7 +80,7 @@ class Book(db.Model):
     author = db.relationship('Author', backref='books')
     user =db.relationship('User', secondary="books_user")
     genres = db.relationship(
-        "Genre", secondary="books_genres")
+        "Genre", secondary="books_genres", backref='books')
 
     def __repr__(self):
         return f'<Book book_id={self.book_id} title={self.title} author={self.author}>'

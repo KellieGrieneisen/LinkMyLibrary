@@ -7,7 +7,7 @@ import os
 import json
 # from database import session as db_session
 from model import connect_to_db, db, Book
-from jinja2 import StrictUndefined
+# from jinja2 import StrictUndefined
 
 
 app = Flask(__name__)
@@ -135,7 +135,7 @@ def search_for_book():
     }
     response = requests.get(url, params=payload)
     data = response.json()
-    return render_template("book_search_results.html",books=data['items'])
+    return render_template("book_search_results.html", books=data['items'])
    
         
    
@@ -177,41 +177,20 @@ def add_searched_book():
         author = data['volumeInfo']['authors'][0]
         book_cover = data['volumeInfo']['imageLinks']['thumbnail']
         summary = data['volumeInfo']['description']
+        genres = data['volumeInfo']['categories']
         check_book = crud.get_book_by_title(title)
         search_author= crud.get_author(author)
+        if search_author is None:
+            new_author= crud.create_author(author)
+            print(new_author)
         if check_book == title:
             flash("You already have this book!")
         else:
-            new_book= crud.create_book(title, summary, book_cover, author)
+            new_book= crud.create_book(title, summary, book_cover, author,genres)
             book_id = new_book.book_id
             crud.add_book_to_user_id(current_user_id,book_id)
             print(new_book)
-        if search_author != author:
-            new_author= crud.create_author(author)
-            print(new_author)
-           
         
-
-
-
-    # if get_books:
-    #     for book in get_books:
-            
-    #         title = request.form.get("title")
-    #         print(title)
-    #         author = request.form.get("author")
-    #         summary = request.form.get("summary")
-    #         book_cover = request.form.get("book_cover")
-    #         check_book = crud.get_book_by_title(title)
-    #         search_author= crud.get_author(author)
-    #         if check_book == title:
-    #             flash("You already have this book!")
-    #         elif search_author != author:
-    #             crud.create_author(author)
-           
-            # new_book= crud.create_book(title, summary, book_cover, author)
-            # book_id = new_book.book_id
-            # crud.add_book_to_user_id(current_user_id,book_id)
  
    
     return redirect('/find-book')
@@ -225,30 +204,17 @@ def show_library():
     if crud.get_users is None:
         return redirect('/login')
     if logged_in_email is None:
-        flash("You must log in to view your tbr!")
         return redirect('/login')
     
-    
+    #get users name for more personalized experience
     name = crud.get_username_by_email(logged_in_email)
+    #call for books only associated with the current user in session
     users_books = crud.get_books_by_email(logged_in_email) 
     print(users_books)
     print('**************')
  
  
-    if request.method == 'POST':
-        read_status = request.form.getlist('update-status')
-        print(read_status)
-    
-        for book in users_books:
-            book_id = book.book_id 
 
-            for stats in read_status: 
-                print(stats)
-                if stats == "True":
-                    print(book.title)
-                    crud.update_reading_stats(book_id)
-        
-        return redirect('/tbr')
 
         
     return render_template('user_library.html', name=name, users_books=users_books)
@@ -259,20 +225,10 @@ def set_book(book_id):
     """Set book status as true or false"""
     #get book by book id(query)
     book = Book.query.get(book_id)
-
+    #toggle the T/F boolean value in database
     book.have_read = not book.have_read
     
-    #get book status from request.form
-    # read_status = request.form.get('status')
-  
-    # if read_status == "True":
-    #     book_stat = False
-    #     db.session.add(book_stat)
-    #     db.session.commit()
-    # elif read_status =="False":
-    #     book_stat = True
-    #db.seesion.add and commit
-
+    #add and commit update
     db.session.add(book)
     db.session.commit()
 
@@ -281,12 +237,6 @@ def set_book(book_id):
             'book_id': book_id,
             'have_read': book.have_read
         }
-    #return jsonify dictionary
-    # {
-
-        #boook attributes: 
-
-    # }
 
     return book_info
     
@@ -304,6 +254,14 @@ def show_tbr_list():
     
     return render_template('user_tbr.html',name=name,tbr_list=tbr_list)
 
+@app.route('/genres')
+def show_genres_in_library():
+    """Display Genres in users library."""
+    logged_in_email = session.get("user_email")
+    users_books = crud.get_books_by_email(logged_in_email)
+    book_genres = crud.get_genres(users_books)
+
+    return render_template('book-recs.html', book_genres=book_genres)
 
 
 if __name__ == '__main__':

@@ -6,27 +6,26 @@
 
 {% block body %}
 <form action="/add-searched-book" class="book-results" method="POST">
+{% if books %}
 {% for book in books %}
 
-   <input type="hidden" name="book_cover" 
-   value="{{ book['volumeInfo']['imageLinks']['thumbnail'] }}">
-
+   
    <img src={{ book['volumeInfo']['imageLinks']['thumbnail'] }}><br>
 
-   <input type="hidden" name="title" value="{{ book['volumeInfo']['title'] }}">
 
    Title:  {{book['volumeInfo']['title']}} <br>
 
-   <input type="hidden" name="author" value="{{ book['volumeInfo']['authors'][0] }}">
 
    By: {{book['volumeInfo']['authors'][0]}}<br><br>
-
-   <input type="hidden" name="summary" value="{{ book['volumeInfo']['description'] }}">
+   Genres: {{book['volumeInfo']['categories']}}<br>
+   
    Summary: {{ book['volumeInfo']['description'] }}
+
    
 <input type="checkbox" name="addbooks" value="{{book['id']}}"><br>
    
 {% endfor %} 
+{% endif %}
 <button class="float-left submit-button" >Add Book to library</button><br>
 </form>    
 

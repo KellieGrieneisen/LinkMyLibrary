@@ -1,6 +1,6 @@
 """CRUD operations."""
 
-from model import db, User, Books_User, Book, Author, connect_to_db
+from model import db, User, Books_User, Book, Author, connect_to_db, Genre
 
 
 def create_user(name, email, password):
@@ -33,14 +33,24 @@ def add_book_to_user_id(current_user_id,book_id):
 
     return connection
 
+def get_genres(books):
+    """Query for genres related to users books."""
+    b_gens =[]
+    for book in books:
+        genre = book.genres
+        b_gens.append(genre)
+    return b_gens
 
 
-
-def create_book(title, summary, book_cover, author):
+def create_book(title, summary, book_cover, author,genres):
     """Create and return book to user library."""
     book_author = Author(full_name=author)
     new_book = Book(title=title, summary=summary, book_cover_path=book_cover)
     book_author.books.append(new_book)
+    for genre in genres:
+        new_genres = Genre(name=genre)
+        if new_genres not in Genre.query.all():
+            new_genres.books.append(new_book)
 
     db.session.add(new_book)
     db.session.commit()

@@ -1,0 +1,18 @@
+{% extends 'base.html' %} 
+{% block title %}Book Recommendations{% endblock %}
+ 
+
+
+
+{% block body %}
+{% for genres in book_genres %}
+{% for genre in genres %}
+<a>{{genre.name}}</a><br>
+{% endfor %}
+{% endfor %}
+
+
+
+   
+
+{% endblock %}
