@@ -1,16 +1,22 @@
 {% extends 'base.html' %} 
+
 {% block title %}Book Recommendations{% endblock %}
  
 
-
-
 {% block body %}
-{% for genres in book_genres %}
-{% for genre in genres %}
-<a>{{genre.name}}</a><br>
-{% endfor %}
-{% endfor %}
+    <form action='/genres' method="POST">
+        Which Genre would you like Books Recommendations from?
+        <select name="genres">
+        <option>
+    {% for genres in book_genres %}
+        {% for genre in genres %}
+        <option value="{{genre.name}}"> {{genre.name}}</option>
+        {% endfor %}
+    {% endfor %}
 
+</select>
+<button class="float-left submit-button" >Go!</button>
+    </form>
 
 
    

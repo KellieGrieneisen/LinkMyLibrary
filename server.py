@@ -7,12 +7,12 @@ import os
 import json
 # from database import session as db_session
 from model import connect_to_db, db, Book
-# from jinja2 import StrictUndefined
+from jinja2 import StrictUndefined
 
 
 app = Flask(__name__)
 app.secret_key = "$BooksAreCOOL$"
-# app.jinja_env.undefined = StrictUndefined
+app.jinja_env.undefined = StrictUndefined
 
 os.system("source ./projectInfo/secrets.sh") 
 API_KEY = os.environ['GOOGLEBOOKS_API_KEY']
@@ -137,21 +137,7 @@ def search_for_book():
     data = response.json()
     return render_template("book_search_results.html", books=data['items'])
    
-        
-   
-    # book = data['items'][0]['volumeInfo']
-    # title = book['title']
-    # author = book['authors'][0]
-    # summary = book['description']
-    # book_cover = book['imageLinks']['thumbnail']
-    
-
-
-    # logged_in_email = session.get("user_email")    
-    # current_user_id = crud.get_id_by_email(logged_in_email)
-    # new_book= crud.create_book(title, summary, book_cover, author)
-    # book_id = new_book.book_id
-    # crud.add_book_to_user_id(current_user_id,book_id)    
+     
    
     
 
@@ -254,12 +240,28 @@ def show_tbr_list():
     
     return render_template('user_tbr.html',name=name,tbr_list=tbr_list)
 
-@app.route('/genres')
+@app.route('/genres', methods=["GET","POST"])
 def show_genres_in_library():
     """Display Genres in users library."""
     logged_in_email = session.get("user_email")
     users_books = crud.get_books_by_email(logged_in_email)
     book_genres = crud.get_genres(users_books)
+    
+    if request.method == "POST":
+
+        search = request.form.get('genres')
+  
+
+        url = 'https://www.googleapis.com/books/v1/volumes'
+    
+        payload ={
+            'apikey': API_KEY,
+            'maxResults':10,
+            'q': search
+        }
+        response = requests.get(url, params=payload)
+        data = response.json()
+        return render_template('book_search_results.html',books=data['items'])
 
     return render_template('book-recs.html', book_genres=book_genres)
 
