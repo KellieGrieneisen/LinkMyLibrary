@@ -9,18 +9,22 @@
 {% if books %}
 {% for book in books %}
 
-   
+   {% if 'imageLinks' in book['volumeInfo']%}
    <img src={{ book['volumeInfo']['imageLinks']['thumbnail'] }}><br>
-
+   {% endif %}
 
    Title:  {{book['volumeInfo']['title']}} <br>
 
-
+   {% if 'authors' in book['volumeInfo'] %}
    By: {{book['volumeInfo']['authors'][0]}}<br><br>
+   {% endif %}
+   {% if 'categories' in book['volumeInfo']%}
    Genres: {{book['volumeInfo']['categories']}}<br>
+   {% endif %}
+   {% if 'description' in book['volumeInfo'] %}
    
-   Summary: {{ book['volumeInfo']['description'] }}
-
+   Summary: {{ book['volumeInfo']['description']}} 
+   {% endif %}
    
 <input type="checkbox" name="addbooks" value="{{book['id']}}"><br>
    
