@@ -169,7 +169,7 @@ def add_searched_book():
         if search_author is None:
             new_author= crud.create_author(author)
             print(new_author)
-        if check_book == title:
+        if check_book:
             flash("You already have this book!")
         else:
             new_book= crud.create_book(title, summary, book_cover, author,genres)

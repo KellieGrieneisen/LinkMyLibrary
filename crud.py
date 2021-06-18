@@ -38,7 +38,8 @@ def get_genres(books):
     b_gens =[]
     for book in books:
         genre = book.genres
-        b_gens.append(genre)
+        if genre not in b_gens:
+            b_gens.append(genre)
     return b_gens
 
 
@@ -48,10 +49,17 @@ def create_book(title, summary, book_cover, author,genres):
     new_book = Book(title=title, summary=summary, book_cover_path=book_cover)
     book_author.books.append(new_book)
     for genre in genres:
-        new_genres = Genre(name=genre)
-        if new_genres not in Genre.query.all():
+        print(genre)
+        book_genres = Genre.query.filter(Genre.name==genre).first()
+        print('***************')
+        print(book_genres)
+        if book_genres is None:
+            new_genres = Genre(name=genre)
             new_genres.books.append(new_book)
-
+        else:
+            book_genres.books.append(new_book)
+        
+    
     db.session.add(new_book)
     db.session.commit()
 
