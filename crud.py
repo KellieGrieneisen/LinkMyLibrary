@@ -37,9 +37,16 @@ def get_genres(books):
     """Query for genres related to users books."""
     b_gens =[]
     for book in books:
-        genre = book.genres
-        if genre not in b_gens:
-            b_gens.append(genre)
+        genres = book.genres
+        print(genres)
+        print('**********')
+        print(b_gens)
+        print('***************')
+        for genre in genres:
+            print(genre.genre_id)
+            if genre.name not in b_gens:
+                b_gens.append(genre.name)
+    print(b_gens)
     return b_gens
 
 

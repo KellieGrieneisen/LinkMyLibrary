@@ -9,9 +9,9 @@
         <select name="genres">
         <option>
     {% for genres in book_genres %}
-        {% for genre in genres %}
-        <option value="{{genre.name}}"> {{genre.name}}</option>
-        {% endfor %}
+       
+        <option value="{{genres}}"> {{genres}}</option>
+       
     {% endfor %}
 
 </select>
