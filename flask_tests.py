@@ -1,8 +1,8 @@
 from unittest import TestCase
 from server import app, session
-import flask
+from flask import session
 from model import User, connect_to_db, db
-import server
+
 
 class FlaskTests(TestCase):
 
@@ -20,9 +20,11 @@ class FlaskTests(TestCase):
         # Create tables and add sample data
       db.create_all()
 
-      with self.client as c:
-            with c.session_transaction() as sess:
-                sess['email'] = 'tester@email.com'
+      # with self.client as c:
+      #       with c.session_transaction() as sess:
+      #           sess['email'] = 'tester@email.com'
+
+      
       # example_data()
 
   def tearDown(self):
@@ -42,13 +44,21 @@ class FlaskTests(TestCase):
                               data={"email": "tester@email.com", "password": "enterLib2"},
                               follow_redirects=True)
    
+    
+
+   
   def testSession1(self):
     """test if user is in session."""
-  
+    # this needs work, doesnt test if email in session currently
     with self.client as c:
-      res = c.get('/login')
+      with c.session_transaction() as sess:
+        sess['email'] = 'tester@email.com'
+    
+      res = c.get("/",follow_redirects=True)
+
       self.assertEqual(res.status_code, 200)
-      self.assertEqual(flask.session['email'], 'tester@email.com')
+      self.assertEqual('tester@email.com',sess['email'])
+      
 
    
   def test_homepage(self):
@@ -87,6 +97,27 @@ class FlaskTests(TestCase):
     result = self.client.post("/user",
                               data={"name":"Baloonicorn","email": "tester@email.com", "password": "enterLib2"},
                               follow_redirects=True)
+    #look up how to test if data is saved to db
+    new_user = User.query.filter(User.email=='tester@email.com')
+    self.assertIn(new_user, testlibrary)
+
+    #assert user in testlibrary
+
+  def test_tbr_boolean(self):
+    """Test that only books with False boolean are displayed in TBR."""
+
+
+
+  def test_tbr_route(self):
+    """Test /tbr route."""
+  
+    with self.client as c:
+      with c.session_transaction() as sess:
+        sess['email'] = 'tester@email.com'
+      
+        result = c.get('/tbr', follow_redirects=True)
+      self.assertIn(b'<title>To Be Read</title>', result.data)
+    
     
 
 

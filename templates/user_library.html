@@ -11,7 +11,10 @@
 <nav></nav>
 <a href="/find-book">Add Books to your library!</a>/
 <a href="/tbr">View To Be Read List</a>/
-<a href="/genres">View Genres in this Library</a>
+<a href="/genres">Get Book Recommendations</a> /
+<form action="/logout" class="inline">
+  <button class="float-left submit-button">Logout of Library</button>
+</form>
 </nav>
 
 <ul>
@@ -42,9 +45,6 @@
   {% endif %}
 </ul>
 
-<form action="/logout" class="inline">
-  <button class="float-left submit-button">Logout of Library</button>
-</form>
 
 {% endblock %}
 

@@ -68,6 +68,7 @@ class Book(db.Model):
                         primary_key=True)
 
     title = db.Column(db.String(50))
+    # change string length 100, erroring on 50. need to drop db and rebuild
     summary = db.Column(db.Text)
     book_cover_path = db.Column(db.String)
     have_read = db.Column(db.BOOLEAN, default= True)

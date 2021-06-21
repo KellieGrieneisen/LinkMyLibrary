@@ -1,8 +1,10 @@
-{% block title %}<h1>My To Be Read</h1>{% endblock %}
+{% extends 'base.html' %} 
+{% block title %}To Be Read{% endblock %}
 
 {% block body %} 
 <h2>{{name}}'s TBR</h2>
 <br>
+<a href="/">Back to your library</a>
 
 <ul>
 {% for book in tbr_list %}
@@ -11,5 +13,5 @@
 {% endfor %}
 
 </ul><br>
-<a href="/">Back to your library</a>
+
 {% endblock %}
