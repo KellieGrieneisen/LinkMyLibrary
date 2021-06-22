@@ -5,10 +5,20 @@
 {% block body %} 
 <style>
   body {
-    background-image: url(aliis-sinisalu-yOh9lWBDjP4-unsplash.jpg);
-    background-size: 150px;
+    background-image: url('/static/img/thomas-kelley-hHL08lF7Ikc-unsplash.jpg');
+    background-size: 1550px;
+    margin: 80px;
   }
+
+  h1 { color: white}
+  .boxes {
+    color: whitesmoke;
+    background-color:rgb(59, 45, 8);
+
+  }
+ 
 </style>
+<div class="boxes">
 <h1>Welcome to Link My Library!</h1> 
 <h2>“Books are the quietest and most constant of friends; <br>
     they are the most accessible and wisest of counselors, <br>
@@ -16,7 +26,7 @@
 
 <!-- form to create user login -->
 
-
+  
     <form class="form-signin" action="/login" method="POST">
 
     <h2 class="form-signin-heading">Sign in to your library</h2>
@@ -42,7 +52,7 @@
              required>
     </div>
   <!-- btn-deafualt makes button white, chose this because of ideal future css -->
-    <button class="btn btn-lg btn-default btn-block" type="submit">Sign In
+    <button class="btn-block" type="submit">Sign In
     </button>
   
   </form>
@@ -53,7 +63,7 @@
 </form>
 
 
-  
+</div> 
 
 
 {% endblock %}

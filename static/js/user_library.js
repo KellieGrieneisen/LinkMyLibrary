@@ -2,19 +2,9 @@
 
 
 
-// const formData = {
-//    read: $('#read').val(),
-//    unread: $('#unread').val()
-// }
 
 $('.read').on('click', (evt) =>{
-    // console.log(evt);
-    // console.log(evt.currentTarget);
-    
-    // const formData = {
-    //     read: $('#read').val(),
-    //     unread: $('#unread').val()
-    // }
+  
     const bookId = $(evt.target).data('bookId');
 
     console.log(`Making request for book ID: ${bookId}`);
@@ -24,3 +14,8 @@ $('.read').on('click', (evt) =>{
       
     });
 });
+
+let popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+  let popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+  return new bootstrap.Popover(popoverTriggerEl)
+})

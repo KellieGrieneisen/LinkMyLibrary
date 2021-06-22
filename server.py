@@ -119,7 +119,7 @@ def show_book_form():
     """Book search form."""
 
     return render_template('search_book.html') 
-    
+
 
 @app.route('/find-book', methods=["POST"])
 def search_for_book():
@@ -226,6 +226,11 @@ def set_book(book_id):
         }
 
     return book_info
+
+@app.route('/get-book-summary/<book_id>')
+def view_summary(book_id):
+    """Retrieve book summary from database."""
+    
     
 
 @app.route('/tbr')

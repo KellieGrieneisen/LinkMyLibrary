@@ -4,32 +4,50 @@
 {% block body %}
 <script src="http://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
   crossorigin="anonymous"></script>
+  <style>
+    body {
+      background-color: lightblue;
+      /* background-size: 1500px; */
+    }
+  </style>
 
 <h2>Welcome Back {{name}}</h2>
 
 <br>
-<nav></nav>
-<a href="/find-book">Add Books to your library!</a>/
-<a href="/tbr">View To Be Read List</a>/
-<a href="/genres">Get Book Recommendations</a> /
-<form action="/logout" class="inline">
-  <button class="float-left submit-button">Logout of Library</button>
-</form>
+<nav class="nav-bar">
+  <div class="container-fluid">
+    <div class="row-9">
+    <a href="/find-book">Add Books to your library!</a>/
+    <a href="/tbr">View To Be Read List</a>/
+    <a href="/genres">Get Book Recommendations</a> /
+    <form action="/logout" class="inline">  
+    <button class="submit-button">Logout of Library</button>
+    </form>
+  </div>  
+</div>
 </nav>
 
-<ul>
+
+
+<div class="container-fluid">
+  <div class="row">
+    
+
   {% if users_books %}
     {% for book in users_books %}
 
-      <li>
+      <div class='col-3'>
         <img src={{book.book_cover_path}}>
-        <br>{{book.title}}<br>
+        <br>
+        <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" 
+        data-bs-trigger="hover focus" data-bs-content="{{book.summary}}">
+          <button class="btn btn-primary" type="button" disabled>{{book.title}}</button>
+        </span><br>
         By: {{book.author}}<br>
         {% for genre in book.genres%}
         {{genre.name}}
         {% endfor %}
-      </li>
-
+      
       <span class="tbr-add">
         Have you read this?
         <input
@@ -40,12 +58,12 @@
           {% if book.have_read %}checked{% endif %}
         />
       </span>
+    </div>
     {% endfor %}
-
   {% endif %}
-</ul>
 
-
+  </div> 
+</div>
 {% endblock %}
 
 {% block js %}
