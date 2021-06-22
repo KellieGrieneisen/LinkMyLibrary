@@ -188,21 +188,18 @@ def add_searched_book():
 def show_library():
     """View users library."""
     logged_in_email = session.get("user_email")
-    if crud.get_users is None:
-        return redirect('/login')
-    if logged_in_email is None:
+    if crud.get_users is None or logged_in_email is None:
         return redirect('/login')
     
     #get users name for more personalized experience
     name = crud.get_username_by_email(logged_in_email)
     #call for books only associated with the current user in session
     users_books = crud.get_books_by_email(logged_in_email) 
-    print(users_books)
+    print(type(users_books[2].summary))
     print('**************')
  
  
-
-
+    
         
     return render_template('user_library.html', name=name, users_books=users_books)
 
@@ -230,7 +227,7 @@ def set_book(book_id):
 @app.route('/get-book-summary/<book_id>')
 def view_summary(book_id):
     """Retrieve book summary from database."""
-    
+
     
 
 @app.route('/tbr')

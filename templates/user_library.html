@@ -2,9 +2,7 @@
 {% block title %}My Library{% endblock %}
 
 {% block body %}
-<script src="http://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-  crossorigin="anonymous"></script>
-  <style>
+
     body {
       background-color: lightblue;
       /* background-size: 1500px; */
@@ -39,10 +37,11 @@
       <div class='col-3'>
         <img src={{book.book_cover_path}}>
         <br>
-        <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" 
-        data-bs-trigger="hover focus" data-bs-content="{{book.summary}}">
-          <button class="btn btn-primary" type="button" disabled>{{book.title}}</button>
-        </span><br>
+        <span class="d-inline-block" title="Summary" data-bs-toggle="popover" 
+         data-bs-html='true'  data-bs-content="{{book.summary}}" >
+          <button class="btn btn-info" type="button" >{{book.title}}</button>
+        </span>
+        <br>
         By: {{book.author}}<br>
         {% for genre in book.genres%}
         {{genre.name}}
