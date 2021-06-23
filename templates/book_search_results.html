@@ -6,12 +6,14 @@
 
 {% block body %}
 <h2>We Recommend</h2>
+
 <div class="container">
-   <div class="row">
    <form action="/add-searched-book" class="book-results" method="POST">
    {% if books %}
+   <div class="row">
       {% for book in books %}
       <div class='col-3'>
+      
       {% if 'imageLinks' in book['volumeInfo']%}
          <img src={{ book['volumeInfo']['imageLinks']['thumbnail'] }}><br>
       {% endif %}
@@ -30,14 +32,15 @@
          Summary: {{ book['volumeInfo']['description']}} 
       {% endif %}
    
-      <input type="checkbox" name="addbooks" value="{{book['id']}}"><br>
+      <input type="checkbox" name="addbooks" value="{{book['id']}}">
       </div>
    {% endfor %} 
-{% endif %}
    </div>
+{% endif %}
+   
 
-<button class="float-left submit-button" >Add Book(s) to library</button><br>
-</form>  
+   <button class="float-left submit-button" >Add Book(s) to library</button><br>
+   </form>  
 </div>  
 
 {% endblock %}
