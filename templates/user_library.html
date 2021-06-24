@@ -2,50 +2,62 @@
 {% block title %}My Library{% endblock %}
 
 {% block body %}
-
+  <style>
     body {
-      background-color: lightblue;
-      /* background-size: 1500px; */
+      background-image: url('/static/img/miguel-bruna-M9fX9Kz3w8s-unsplash.jpg');
+      background-size: auto;
     }
   </style>
 
-<h2>Welcome Back {{name}}</h2>
+<h2>Welcome Back {{name}}!</h2>
 
 <br>
 <nav class="nav-bar">
-  <div class="container-fluid">
-    <div class="row-9">
-    <a href="/find-book">Add Books to your library!</a>/
-    <a href="/tbr">View To Be Read List</a>/
-    <a href="/genres">Get Book Recommendations</a> /
-    <form action="/logout" class="inline">  
-    <button class="submit-button">Logout of Library</button>
-    </form>
-  </div>  
-</div>
+  <div class="container">
+    <div class="row">
+
+      <div class="col-3">
+        <a href="/find-book">Add Books to your library!</a>
+      </div>
+      <div class="col-3">
+        <a href="/tbr">View To Be Read List</a>
+      </div>
+      <div class="col-3">
+        <a href="/genres">Get Book Recommendations</a> 
+      </div>
+      <div class="col-3">
+        <form action="/logout" class="inline">  
+        <button class="submit-button">Logout of Library</button>
+        </form>
+      </div>
+
+    </div>  
+  </div>
 </nav>
 
 
 
-<div class="container-fluid">
+<div class="container">
   <div class="row">
     
 
   {% if users_books %}
     {% for book in users_books %}
 
-      <div class='col-3'>
-        <img src={{book.book_cover_path}}>
+      <div class='col-3' id="bookbox">
+        
         <br>
         <span class="d-inline-block" title="Summary" data-bs-toggle="popover" 
          data-bs-html='true'  data-bs-content="{{book.summary}}" >
-          <button class="btn btn-info" type="button" >{{book.title}}</button>
+          <button class="btn btn-sm btn-light" type="button" ><img src={{book.book_cover_path}}></button>
         </span>
         <br>
-        By: {{book.author}}<br>
-        {% for genre in book.genres%}
+        {{book.title}}
+        <br>
+        By: <i>{{book.author}}</i><br>
+        <!-- {% for genre in book.genres%}
         {{genre.name}}
-        {% endfor %}
+        {% endfor %} -->
       
       <span class="tbr-add">
         Have you read this?

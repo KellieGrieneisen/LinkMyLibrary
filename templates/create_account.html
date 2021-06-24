@@ -1,41 +1,63 @@
+{% extends 'base.html' %}
 {% block title %}Create a new library user!{% endblock %}
 
 {% block body %}
-<form class="form-newuser" action ="/user" method="POST">
+<style>
+  body {
+    background-image: url('/static/img/austin-chan-ukzHlkoz1IE-unsplash.jpg');
+    background-size:cover;
+    margin-right: 900px;
+    color: ghostwhite;
 
-    <h2 class="form-newuser-heading">Create an account here:</h2>
-    <div class="form-group">
-      <label for="username" class="user">What can we call you? </label>
-      <input type="text"
-             name="username"
-             class="form-control input-lg"
-             placeholder="Name or Nickname">
-    </div>
+  }
+</style>
 
 
-    <div class="form-group">
-      <label for="email-field" class="user-email">Enter Email</label>
+<div class="container-fluid" id="newuser">
+  
+    <form class="form-newuser" action ="/user" method="POST">
+    
+        <h2 class="form-newuser-heading">Create an account here:</h2>
+        <div class="form-group">
+          <label for="username" class="user">What can we call you? </label>
+          <input type="text"
+                 name="username"
+                 class="form-control input-lg"
+                 placeholder="Name or Nickname">
+        </div>
       
-      <!-- look into class here, keep large? change? -->
-      <input type="email"
-             name="email"
-             class="form-control input-lg"
-             placeholder="nerdyworm@book.com"
-             required>
-    </div>
-  
-    <div class="form-group">
-      <label for="password-field" class="user-pass">Create your Password</label>
-      <input type="password"
-             name="password"
-             class="form-control input-lg"
-             placeholder="Password"
-             required>
-    </div>
-  <!-- btn-deafualt makes button white, chose this because of ideal future css -->
-    <button class="btn btn-lg btn-default btn-block" type="submit">Create Account
-    </button>
-  
-  </form>
+      
+        <div class="form-group">
+          <label for="email-field" class="user-email">Enter Email</label>
+          <!-- look into class here, keep large? change? -->
+          <input type="email"
+                 name="email"
+                 class="form-control input-lg"
+                 placeholder="nerdyworm@book.com"
+                 required>
+        </div>
+      
+        <div class="form-group">
+          <label for="password-field" class="user-pass">Create your Password</label>
+          <input type="password"
+                 name="password"
+                 class="form-control input-lg"
+                 placeholder="Password"
+                 required>
+        </div>
 
+      <!-- btn-deafualt makes button white, chose this because of ideal future css -->
+        <button class="btn btn-lg btn-default btn-block" type="submit">Create Account
+        </button>
+      </form>
+    </div>
+    
+    
+
+    <div class="container-fluid" id="quote">“I can never read all the books I want; I can never be all the people I want 
+    and live all the lives I want. I can never train myself in all the skills I want. 
+    And why do I want? I want to live and feel all the shades, tones and variations of 
+    mental and physical experience possible in my life. And I am horribly limited.” 
+    ― Sylvia Plath</div>
+  
 {% endblock %}

@@ -4,18 +4,32 @@
  
 
 {% block body %}
-    <form action='/genres' method="POST">
-        Which Genre would you like Books Recommendations from?
-        <select name="genres">
-        <option>
-    {% for genres in book_genres %}
-       
-        <option value="{{genres}}"> {{genres}}</option>
-       
-    {% endfor %}
 
-</select>
-<button class="float-left submit-button" >Go!</button>
+<style>
+    body {
+      background-image: url('/static/img/elcarito-MHNjEBeLTgw-unsplash.jpg');
+      background-size:cover;
+      margin: 80px; 
+    }
+  </style>
+
+
+
+
+    <form action='/genres'  method="POST">
+        Which Genre would you like Books Recommendations from?<br>
+        <div class="wrapper" >
+        <select class="dropdown dropdown--scrollable" id="genrelist" size="8" name="genres"> 
+              
+            {% for genres in book_genres %}
+                
+              <option value="{{genres}}"> {{genres}}</option>
+                
+            {% endfor %}
+
+        </select>
+          <button class="float-left submit-button" >Go!</button>
+        </div>  
     </form>
 
 

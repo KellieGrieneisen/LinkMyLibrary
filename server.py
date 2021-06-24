@@ -131,7 +131,7 @@ def search_for_book():
     
     payload ={
         'apikey': API_KEY,
-        'maxResults':10,
+        'maxResults':20,
         'q': search
     }
     response = requests.get(url, params=payload)
@@ -259,7 +259,7 @@ def show_genres_in_library():
     
         payload ={
             'apikey': API_KEY,
-            'maxResults':10,
+            'maxResults':30,
             'q': search
         }
         response = requests.get(url, params=payload)

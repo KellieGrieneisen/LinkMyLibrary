@@ -5,6 +5,16 @@
 
 
 {% block body %}
+<style>
+   body {
+     background-image: url('/static/img/freestocks-OfaDD5o8hpk-unsplash.jpg');
+     background-size: 1500px;
+   }
+ </style>
+
+
+
+
 <h2>We Recommend</h2>
 
 <div class="container">
@@ -12,25 +22,34 @@
    {% if books %}
    <div class="row">
       {% for book in books %}
-      <div class='col-3'>
+      <div class='col-3' id="results">
       
       {% if 'imageLinks' in book['volumeInfo']%}
          <img src={{ book['volumeInfo']['imageLinks']['thumbnail'] }}><br>
       {% endif %}
-
-      Title:  {{book['volumeInfo']['title']}} <br>
+       
+      {% if 'title' in book['volumeInfo']%}
+      <b>Title:</b>  {{book['volumeInfo']['title']}} <br>
+      {% endif %}
 
       {% if 'authors' in book['volumeInfo'] %}
-         By: {{book['volumeInfo']['authors'][0]}}<br><br>
+         <b>By:</b> {{book['volumeInfo']['authors'][0]}}<br>
       {% endif %}
-
+      
       {% if 'categories' in book['volumeInfo']%}
-         Genres: {{book['volumeInfo']['categories']}}<br>
+         <b>Genres:</b> {{book['volumeInfo']['categories']}}<br>
       {% endif %}
-
+         
+         
       {% if 'description' in book['volumeInfo'] %}
-         Summary: {{ book['volumeInfo']['description']}} 
+       
+
+         <button type="button" class="btn btn-sm btn-light" data-bs-toggle="popover" title="Summary" 
+         data-bs-content="{{book['volumeInfo']['description']}}">Summary</button>
+
       {% endif %}
+   
+      
    
       <input type="checkbox" name="addbooks" value="{{book['id']}}">
       </div>
@@ -43,4 +62,7 @@
    </form>  
 </div>  
 
+{% endblock %}
+{% block js %}
+<script src="/static/js/user_library.js"></script>
 {% endblock %}

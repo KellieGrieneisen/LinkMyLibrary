@@ -2,16 +2,26 @@
 {% block title %}To Be Read{% endblock %}
 
 {% block body %} 
-<h2>{{name}}'s TBR</h2>
+<style>
+    body {
+      background-image: url('/static/img/greg-rakozy-oMpAz-DN-9I-unsplash.jpg');
+      background-size:cover;
+    }
+  </style>
+
+
+<h2 class="tbr">{{name}}'s TBR</h2>
 <br>
-<a href="/">Back to your library</a>
+<a href="/">To {{name}}'s library</a>
+<div class="container-fluid">
+    <div class="row">
+    {% for book in tbr_list %}
+        <div class='col-3' id="results">
+            <img src={{book.book_cover_path}}><br>{{book.title}}<br>By: {{book.author}}<br>
+        </div>
+    {% endfor %}
 
-<ul>
-{% for book in tbr_list %}
-    <li><img src={{book.book_cover_path}}><br>{{book.title}}<br>By: {{book.author}}<br></li>
-
-{% endfor %}
-
-</ul><br>
+    </div>
+</div>  
 
 {% endblock %}
