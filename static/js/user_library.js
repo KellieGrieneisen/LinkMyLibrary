@@ -1,7 +1,6 @@
 "use strict";
 
 
-
 // toggle value for have-read in database by targeting checkbox
 // and changing on click via server route commands and queries.
 $('.read').on('click', (evt) =>{

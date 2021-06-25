@@ -1,0 +1,100 @@
+.popover-body {
+    height: 300px;
+    overflow-y: scroll;
+    scrollbar-width: 2px;
+
+}
+
+#results {
+    margin: 0pt;
+    text-align: center;
+    border: solid;
+    border-style: groove;
+    background: rgb(245, 245, 245,0.5);
+}
+
+#tbr-list {
+    margin: 3pt;
+    text-align: center;
+    border: solid;
+    
+    border-style: groove;
+    background: rgb(245, 245, 245,0.3);
+    font-weight: bold;
+    font-size: 15px;
+}
+#shelf{
+    width: 800pt;
+
+}
+.tbr{
+    color:thistle;
+}
+
+h1 { color: white;
+    font-family:fantasy ;   
+}
+
+h2 {
+    text-align: center;
+    font-family:fantasy ;
+}
+
+.boxes {
+    color: whitesmoke;
+    background-color:rgb(59, 45, 8,0.5);
+
+  }
+.addbook {
+    color: whitesmoke;
+    background-color:rgba(52, 68, 57, 0.5);
+    margin-left: 300px;
+    margin-right: 300px;
+
+  }
+.nocover{
+    size: 2pt;
+}
+
+a {
+    color:darkslateblue;
+}
+nav{
+    background-color:rgba(224, 232, 233, 0.8);
+    margin-left: 50px;
+    margin-right: 50px;
+}
+.wrapper{
+    width:200px;
+    padding:20px;
+    height: 800px;
+    }
+
+#searchform {
+    text-align: left;
+    margin: 40px;
+    color: whitesmoke;
+}
+
+
+
+#quote {
+    text-align: right;
+    font-size: 20px;
+    margin-top: 0;
+    margin-left: 870px;
+    font-family: fantasy;
+
+}
+
+#newuser {
+
+    margin-top: 40px;    
+} 
+
+#bookbox {
+    text-align: center;
+    border-bottom: solid;
+    border-style:groove;
+    background: rgb(245, 245, 245,0.3)
+}
