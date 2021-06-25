@@ -237,9 +237,6 @@ def set_book(book_id):
 
     return book_info
 
-@app.route('/get-book-summary/<book_id>')
-def view_summary(book_id):
-    """Retrieve book summary from database."""
 
     
 
@@ -269,7 +266,7 @@ def show_genres_in_library():
   
 
         url = 'https://www.googleapis.com/books/v1/volumes'
-    
+        # first page search results
         payload ={
             'apikey': API_KEY,
             'maxResults':30,
@@ -277,7 +274,18 @@ def show_genres_in_library():
         }
         response = requests.get(url, params=payload)
         data = response.json()
-        return render_template('book_search_results.html',books=data['items'])
+
+        # next page search results
+        payload2 ={
+            'apikey': API_KEY,
+            'startIndex':21,
+            'maxResults':20,
+            'q': search
+        }
+
+        response2 = requests.get(url, params=payload2)
+        data2=response2.json()
+        return render_template('book_search_results.html',books=data['items'],books2=data2['items'])
 
     return render_template('book-recs.html', book_genres=book_genres)
 
