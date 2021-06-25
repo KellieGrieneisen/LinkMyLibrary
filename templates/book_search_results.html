@@ -20,7 +20,7 @@
 <div class="container">
    <form action="/add-searched-book" class="book-results" method="POST">
    {% if books %}
-   <div class="row">
+   <div class="row" id="page1">
       {% for book in books %}
       <div class='col-3' id="results">
       
@@ -54,7 +54,49 @@
       <input type="checkbox" name="addbooks" value="{{book['id']}}">
       </div>
    {% endfor %} 
+   
+   <a class="next">Next</a>
+
    </div>
+   <!-- next page -->
+   <div class="row" id="page2">
+      {% for book in books2 %}
+      <div class='col-3' id="results">
+      
+      {% if 'imageLinks' in book['volumeInfo']%}
+         <img src={{ book['volumeInfo']['imageLinks']['thumbnail'] }}><br>
+      {% endif %}
+       
+      {% if 'title' in book['volumeInfo']%}
+      <b>Title:</b>  {{book['volumeInfo']['title']}} <br>
+      {% endif %}
+
+      {% if 'authors' in book['volumeInfo'] %}
+         <b>By:</b> {{book['volumeInfo']['authors'][0]}}<br>
+      {% endif %}
+      
+      {% if 'categories' in book['volumeInfo']%}
+         <b>Genres:</b> {{book['volumeInfo']['categories']}}<br>
+      {% endif %}
+         
+         
+      {% if 'description' in book['volumeInfo'] %}
+       
+
+         <button type="button" class="btn btn-sm btn-light" data-bs-toggle="popover" title="Summary" 
+         data-bs-content="{{book['volumeInfo']['description']}}">Summary</button>
+
+      {% endif %}
+   
+      
+   
+      <input type="checkbox" name="addbooks" value="{{book['id']}}">
+      </div>
+   {% endfor %} 
+   <a class="prev">Prev</a>
+   </div>
+
+
 {% endif %}
    
 

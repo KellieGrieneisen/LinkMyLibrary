@@ -16,7 +16,7 @@
 <div class="container-fluid">
     <div class="row">
     {% for book in tbr_list %}
-        <div class='col-3' id="results">
+        <div class='col-3' id="tbr-list">
             <img src={{book.book_cover_path}}><br>{{book.title}}<br>By: {{book.author}}<br>
         </div>
     {% endfor %}
