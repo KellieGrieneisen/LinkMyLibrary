@@ -48,14 +48,13 @@
          data-bs-content="{{book['volumeInfo']['description']}}">Summary</button>
 
       {% endif %}
-   
-      
+      <br>
    
       <input type="checkbox" name="addbooks" value="{{book['id']}}">
       </div>
    {% endfor %} 
-   
-   <a class="next">Next</a>
+
+   <a class="next" style="color: whitesmoke;">Next</a>
 
    </div>
    <!-- next page -->
@@ -89,11 +88,11 @@
       {% endif %}
    
       
-   
+         <br>
       <input type="checkbox" name="addbooks" value="{{book['id']}}">
       </div>
    {% endfor %} 
-   <a class="prev">Prev</a>
+   <a class="prev" style="color: whitesmoke;">Prev</a>
    </div>
 
 
