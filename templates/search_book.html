@@ -2,22 +2,31 @@
 {% block title %}Search{% endblock %}
 
 {% block body %} 
-<h1>Search for a new book...</h1>
-<form action='/find-book' class="searchbook" method="POST">
-<h2 class ="add-book-head"> What book are you looking for?</h2>
+    <style>
+        body {
+          background-image: url('/static/img/simon-berger-9Ct73yKbpEo-unsplash.jpg');
+          background-size: 1500px;
+        }
+  </style>
 
-<div class='form'>
-    <label for="book-title" >Title or Author</label>
-    <input type="text" name="book-search" class="form-control">
+  <div class="container" id="searchform">
 
+    <h1>Search for a new book...</h1>
+
+    <form action='/find-book' class="searchbook" method="POST">
+    <h2 class ="addbook"> What are you looking for?</h2>
+
+    <div class='form'>
+        <label for="book-search" >Title or Author</label>
+        <input type="text" name="book-search" class="form-control">
+
+    </div>
+
+    <button class="btn btn-sm btn-light" type="submit" value="search">
+        Search for Book  </button>
+
+    </form>
+
+    <a href="/">Back to your library</a>
 </div>
-
-
-
-<button class="btn btn-lg btn-default btn-block" type="submit" value="search">
-    Search for Book  </button>
-
-</form>
-
-<a href="/">Back to your library</a>
 {% endblock %}
