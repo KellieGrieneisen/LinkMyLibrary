@@ -125,7 +125,7 @@ nav{
 
 /* quote on new user form */
 #quote {
-    /* text-align: right; */
+    background-color: rgba(63, 48, 21, 0.5);
     font-size: 20px;
     font-family: fantasy;
     /* margin-top: 40px; */
