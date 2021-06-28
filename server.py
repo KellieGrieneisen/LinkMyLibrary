@@ -138,6 +138,7 @@ def search_for_book():
     }
     response = requests.get(url, params=payload)
     data = response.json() 
+    
     # next page search results
     payload2 ={
         'apikey': API_KEY,

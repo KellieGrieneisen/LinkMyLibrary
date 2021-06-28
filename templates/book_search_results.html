@@ -15,15 +15,15 @@
 
 
 
-<h2>We Recommend</h2>
+<h2>We Recommend...</h2>
 
-<div class="container">
+<div class="container" id="shelf">
    <form action="/add-searched-book" class="book-results" method="POST">
    {% if books %}
    <div class="row" id="page1">
       <!-- loops through list of books in api response -->
       {% for book in books %}
-      <div class='col-3' id="results">
+      <div class='col-4 col-lg-2 col-md-4 col-sm-6' id="results">
       
       {% if 'imageLinks' in book['volumeInfo']%}
          <img src={{ book['volumeInfo']['imageLinks']['thumbnail'] }}><br>
@@ -67,7 +67,7 @@
    <!-- next page in api response  -->
    <div class="row" id="page2">
       {% for book in books2 %}
-      <div class='col-3' id="results">
+      <div class='col-4 col-lg-2 col-md-4 col-sm-6' id="results">
       
       {% if 'imageLinks' in book['volumeInfo']%}
          <img src={{ book['volumeInfo']['imageLinks']['thumbnail'] }}><br>

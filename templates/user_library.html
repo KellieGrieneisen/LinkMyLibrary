@@ -5,7 +5,8 @@
   <style>
     body {
       background-image: url('/static/img/miguel-bruna-M9fX9Kz3w8s-unsplash.jpg');
-      background-size: auto;
+      /* background-size: auto; */
+      background-size: 1500px;
     }
   </style>
 
@@ -14,19 +15,19 @@
 <br>
 <nav class="nav-bar">
   <div class="container">
-    <div class="row">
+    <div class="row align-items-center">
 
-      <div class="col-3">
+      <div class="col-lg-3 col-md-6 col-sm-9">
         <a href="/find-book">Add Books to your library!</a>
       </div>
-      <div class="col-3">
+      <div class="col-lg-3 col-md-6 col-sm-9">
         <a href="/tbr">View To Be Read List</a>
       </div>
-      <div class="col-3">
+      <div class="col-lg-3 col-md-6 col-sm-9">
         <a href="/genres">Get Book Recommendations</a> 
       </div>
-      <div class="col-3">
-        <form action="/logout" class="inline">  
+      <div class="col-lg-3 col-md-6 col-sm-9">
+        <form action="/logout" class="btn">  
         <button class="submit-button">Logout of Library</button>
         </form>
       </div>
@@ -37,14 +38,15 @@
 
 
 
-<div class="container">
-  <div class="row">
+
     
 
   {% if users_books %}
+  <div class="container" id="shelf">
+    <div class="row justify-content-start">
     {% for book in users_books %}
 
-      <div class='col-3' id="bookbox">
+      <div class='col-4 col-lg-2 col-md-4 col-sm-4' id="bookbox">
         
         <br>
         <span class="d-inline-block" title="Summary" data-bs-toggle="popover" 
@@ -78,5 +80,5 @@
 {% endblock %}
 
 {% block js %}
-<script src="/static/js/user_library.js"></script>
+  <script src="/static/js/user_library.js"></script>
 {% endblock %}

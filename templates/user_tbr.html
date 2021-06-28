@@ -12,11 +12,11 @@
 
 <h2 class="tbr">{{name}}'s TBR</h2>
 <br>
-<a href="/">To {{name}}'s library</a>
-<div class="container-fluid" id="shelf">
+<a href="/" style="margin: 100pt;">To {{name}}'s library</a>
+<div class="container" id="shelf">
     <div class="row">
     {% for book in tbr_list %}
-        <div class='col-2' id="tbr-list">
+        <div class='col-2 col-lg-2 col-md-4 col-sm-4' id="tbr-list">
             <img src={{book.book_cover_path}}><br>{{book.title}}<br>By: {{book.author}}<br>
         </div>
     {% endfor %}

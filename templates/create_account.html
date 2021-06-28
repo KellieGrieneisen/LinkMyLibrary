@@ -5,15 +5,15 @@
 <style>
   body {
     background-image: url('/static/img/austin-chan-ukzHlkoz1IE-unsplash.jpg');
-    background-size:cover;
+    background-size:contain;
     margin-right: 900px;
     color: ghostwhite;
-
   }
 </style>
 
 
 <div class="container-fluid" id="newuser">
+  <div class="row">
   
     <form class="form-newuser" action ="/user" method="POST">
     
@@ -50,14 +50,20 @@
         <button class="btn btn-lg btn-default btn-block" type="submit">Create Account
         </button>
       </form>
+      </div>
+
+      <div class="row" id="quote">
+        <!-- <div calss="col-9"> -->
+          “I can never read all the books I want; I can never be all the people I want 
+        and live all the lives I want. I can never train myself in all the skills I want. 
+        And why do I want? I want to live and feel all the shades, tones and variations of 
+        mental and physical experience possible in my life. And I am horribly limited.” 
+        ― Sylvia Plath
+      <!-- </div> -->
     </div>
-    
+  </div>
     
 
-    <div class="container-fluid" id="quote">“I can never read all the books I want; I can never be all the people I want 
-    and live all the lives I want. I can never train myself in all the skills I want. 
-    And why do I want? I want to live and feel all the shades, tones and variations of 
-    mental and physical experience possible in my life. And I am horribly limited.” 
-    ― Sylvia Plath</div>
+    
   
 {% endblock %}

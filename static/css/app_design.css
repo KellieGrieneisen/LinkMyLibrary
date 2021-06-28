@@ -1,41 +1,64 @@
+/* details for summary popovers */
 .popover-body {
     height: 300px;
     overflow-y: scroll;
     scrollbar-width: 2px;
 
 }
-
+/* book results shelf layout */
 #results {
-    margin: 0pt;
+    margin: 3pt;
     text-align: center;
     border: solid;
     border-style: groove;
     background: rgb(245, 245, 245,0.5);
 }
 
-#tbr-list {
-    margin: 3pt;
+/* #results {
+    margin: 0pt;
     text-align: center;
     border: solid;
-    
+    border-style: groove;
+    background: rgb(245, 245, 245,0.5);
+} */
+
+#tbr-list {
+    margin: 5pt;
+    text-align: center;
+    border: solid;
     border-style: groove;
     background: rgb(245, 245, 245,0.3);
     font-weight: bold;
     font-size: 15px;
 }
-#shelf{
-    width: 800pt;
 
+/* all bookshelfs-> library/tbr/results */
+#shelf {
+    width: 900pt;
+    /* margin-left: 120px;
+    margin-right: 100px; */
+    margin: 100pt;
+    margin-top: 5pt;
+    align-tracks: center;
 }
+
+.col{
+
+ margin: 0 auto;
+}
+/* tbr header */
 .tbr{
     color:thistle;
 }
 
-h1 { color: white;
+h1 { 
+    
+    color: white;
     font-family:fantasy ;   
 }
 
 h2 {
+    margin-top: 5pt;
     text-align: center;
     font-family:fantasy ;
 }
@@ -45,6 +68,8 @@ h2 {
     background-color:rgb(59, 45, 8,0.5);
 
   }
+
+  /* search page  */
 .addbook {
     color: whitesmoke;
     background-color:rgba(52, 68, 57, 0.5);
@@ -52,47 +77,56 @@ h2 {
     margin-right: 300px;
 
   }
-.nocover{
-    size: 2pt;
-}
 
+/* tags to navigate through website */
 a {
     color:darkslateblue;
 }
+
+/* homepage navigation bar */
 nav{
     background-color:rgba(224, 232, 233, 0.8);
-    margin-left: 50px;
-    margin-right: 50px;
+    border-style: ridge;
+    margin-left: 90px;
+    margin-right: 90px;
+    align-tracks: center;
+    
 }
+
+/* genres dropdown menu wrapper */
 .wrapper{
     width:200px;
     padding:20px;
     height: 800px;
     }
 
+/* book search header */
 #searchform {
     text-align: left;
     margin: 40px;
     color: whitesmoke;
+
 }
 
 
-
+/* quote on new user form */
 #quote {
-    text-align: right;
+    /* text-align: right; */
     font-size: 20px;
-    margin-top: 0;
-    margin-left: 870px;
+    margin-left: 900px;
     font-family: fantasy;
 
 }
 
 #newuser {
 
-    margin-top: 40px;    
+    margin-top: 40px;   
+    
 } 
 
+/* users library shelf customized layout */
 #bookbox {
+    margin: 5pt;
     text-align: center;
     border-bottom: solid;
     border-style:groove;
