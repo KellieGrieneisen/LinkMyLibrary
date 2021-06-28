@@ -73,14 +73,13 @@ h2 {
 .addbook {
     color: whitesmoke;
     background-color:rgba(52, 68, 57, 0.5);
-    margin-left: 300px;
-    margin-right: 300px;
+    align-tracks: center;
 
   }
 
 /* tags to navigate through website */
 a {
-    color:darkslateblue;
+    color:wheat;
 }
 
 /* homepage navigation bar */
@@ -90,7 +89,12 @@ nav{
     margin-left: 90px;
     margin-right: 90px;
     align-tracks: center;
+    text-align: center;
     
+}
+
+#navigation {
+    color:indigo;
 }
 
 /* genres dropdown menu wrapper */
@@ -113,15 +117,13 @@ nav{
 #quote {
     /* text-align: right; */
     font-size: 20px;
-    margin-left: 900px;
     font-family: fantasy;
-
+    
 }
 
 #newuser {
 
     margin-top: 40px;   
-    
 } 
 
 /* users library shelf customized layout */

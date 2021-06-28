@@ -5,8 +5,8 @@
 <style>
   body {
     background-image: url('/static/img/austin-chan-ukzHlkoz1IE-unsplash.jpg');
-    background-size:contain;
-    margin-right: 900px;
+    background-size:100%;
+    /* margin-right: 900px; */
     color: ghostwhite;
   }
 </style>
@@ -14,7 +14,7 @@
 
 <div class="container-fluid" id="newuser">
   <div class="row">
-  
+    <div class="col-4">
     <form class="form-newuser" action ="/user" method="POST">
     
         <h2 class="form-newuser-heading">Create an account here:</h2>
@@ -49,17 +49,19 @@
       <!-- btn-deafualt makes button white, chose this because of ideal future css -->
         <button class="btn btn-lg btn-default btn-block" type="submit">Create Account
         </button>
-      </form>
+        </form>
+        </div>
       </div>
 
-      <div class="row" id="quote">
-        <!-- <div calss="col-9"> -->
+      <div class="row">
+      
+        <div class="col-4 offset-md-8" id="quote">
           “I can never read all the books I want; I can never be all the people I want 
         and live all the lives I want. I can never train myself in all the skills I want. 
         And why do I want? I want to live and feel all the shades, tones and variations of 
         mental and physical experience possible in my life. And I am horribly limited.” 
         ― Sylvia Plath
-      <!-- </div> -->
+      </div>
     </div>
   </div>
     

@@ -138,7 +138,7 @@ def search_for_book():
     }
     response = requests.get(url, params=payload)
     data = response.json() 
-    
+
     # next page search results
     payload2 ={
         'apikey': API_KEY,
@@ -270,7 +270,8 @@ def show_genres_in_library():
         # first page search results
         payload ={
             'apikey': API_KEY,
-            'maxResults':30,
+            'startIndex':0,
+            'maxResults':20,
             'q': search
         }
         response = requests.get(url, params=payload)
