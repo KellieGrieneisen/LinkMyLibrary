@@ -11,13 +11,13 @@
 </style>
 
 
-<div class="container-fluid" id="newuser">
+<div class="container-fluid">
   <div class="row">
     <div class="col-6 col-lg-4 col-md-6 col-sm-8">
       <!-- form to create a new user in library database -->
-    <form class="form-newuser" action ="/user" method="POST">
+    <form class="form-newuser" action ="/user" method="POST" id="newuser">
     
-        <h2 class="form-newuser-heading">Create an account here:</h2>
+        <h2 class="form-newuser-heading">Join Link My Library:</h2>
         <div class="form-group">
           <label for="username" class="user">What can we call you? </label>
           <input type="text"
@@ -28,7 +28,7 @@
       
       
         <div class="form-group">
-          <label for="email-field" class="user-email">Enter Email</label>
+          <label for="email-field" class="user-email">Enter your Email Address</label>
           <!-- look into class here, keep large? change? -->
           <input type="email"
                  name="email"
@@ -48,9 +48,22 @@
         </div>
 
       <!-- btn-light makes button white, chose this because of ideal future css -->
-        <button class="btn btn-sm btn-light" type="submit">Create Account
+        <button class="btn btn-sm btn-light" type="submit" id="account-evt">Create Account
         </button>
 
+
+        
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <!-- <div class="alert alert-warning">
+        <button type="button" class="close" data-bs-dismiss="alert">&times;</button> -->
+        <br>
+        <b style="font-size: 25px">{{ message }}</b>
+        <!-- </div> -->
+        {% endfor %}
+      {% endif %}
+      {% endwith %}
         </form>
 
         </div>
@@ -68,8 +81,6 @@
       </div>
     </div>
   </div>
-    
-
     
   
 {% endblock %}

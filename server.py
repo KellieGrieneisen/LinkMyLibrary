@@ -43,7 +43,7 @@ def handle_login():
     
     if not user or user.password != password:
         flash("Oops! Something went wrong, check your login info!")
-        return redirect('/login')
+        # return redirect('/login')
     else:
         # Log in user by storing the user's email in session
         session["user_email"] = user.email
@@ -70,10 +70,10 @@ def add_new_account():
     
     if user:
         flash("Email already in use. Try again.")
+        return redirect('/user')
     else:
         crud.create_user(name, email, password)
         flash("Account created! Please log in.")
-
         return redirect('/login')
 
 @app.route('/logout')

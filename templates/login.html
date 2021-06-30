@@ -59,5 +59,13 @@
 
 </div> 
 
+{% with messages = get_flashed_messages() %}
+   {% if messages %}
+      {% for message in messages %}
+        <b style="color: whitesmoke;">{{ message }} </b> 
+      {% endfor %}
+   {% endif %}
+{% endwith %}
+
 
 {% endblock %}

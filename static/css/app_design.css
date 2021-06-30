@@ -125,7 +125,7 @@ nav{
 
 /* quote on new user form */
 #quote {
-    background-color: rgba(63, 48, 21, 0.5);
+    background-color: rgba(78, 61, 35, 0.5);
     font-size: 20px;
     font-family: fantasy;
     /* margin-top: 40px; */
@@ -133,9 +133,11 @@ nav{
 }
 
 #newuser {
-
+    background-color: rgba(78, 61, 35, 0.5);
     margin-top: 40px;  
 } 
+
+
 
 /* users library shelf customized layout */
 #bookbox {

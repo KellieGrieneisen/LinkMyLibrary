@@ -1,6 +1,5 @@
 "use strict";
 
-
 // toggle value for have-read in database by targeting checkbox
 // and changing on click via server route commands and queries.
 $('.read').on('click', (evt) =>{
@@ -14,6 +13,19 @@ $('.read').on('click', (evt) =>{
       
     });
 });
+
+
+
+// const newUserForm = document.querySelector('.form-newuser');
+// $('#account-evt').on('submit', (evt) => {
+//   const emailInput = document.querySelector('input[name="email"]');
+//   const user = crud.get_user_by_email(emailInput);
+//   console.log(user);
+//   if (emailInput === user) {
+//     evt.preventDefault();
+//     alert('Email already in use. Try again.');
+//   }
+// });
 
 // for all bootstraps with a popver toggle, trigger popover on click
 // and view summary of book.
