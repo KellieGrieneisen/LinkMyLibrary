@@ -14,13 +14,13 @@
     background: rgb(245, 245, 245,0.5);
 }
 
-/* #results {
-    margin: 0pt;
-    text-align: center;
-    border: solid;
-    border-style: groove;
-    background: rgb(245, 245, 245,0.5);
-} */
+.results {
+    background-color:rgba(196, 109, 128, 0.3);
+    align-tracks: center;
+    display: table; /* keep the background color wrapped tight */
+    margin: 0px auto 0px auto;
+
+}
 
 #tbr-list {
     margin: 5pt;
@@ -65,7 +65,9 @@ h2 {
     margin-top: 5pt;
     text-align: center;
     font-family:fantasy ;
+    font-weight: bolder;
 }
+
 
 p {
     font-size: 30px;
@@ -84,6 +86,8 @@ p {
     color: whitesmoke;
     background-color:rgba(52, 68, 57, 0.5);
     align-tracks: center;
+    display: table; /* keep the background color wrapped tight */
+    margin: 0px auto 0px auto;
 
   }
 

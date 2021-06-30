@@ -1,5 +1,4 @@
-{% extends 'base.html' %} 
-{% extends 'navigation.html' %} 
+{% extends 'base.html' %}  
 {% block title %}Book results{% endblock %}
  
 
@@ -17,6 +16,7 @@
 
 
 <h2>We Recommend...</h2>
+<h2 class="results" style="font-size: 15px;">select books you wish to add to your library below</h2>
 
 <div class="container" id="shelf">
    <form action="/add-searched-book" class="book-results" method="POST">
@@ -55,7 +55,7 @@
 
       {% endif %}
       <br>
-   
+
       <input type="checkbox" name="addbooks" value="{{book['id']}}">
       </div>
    {% endfor %} 

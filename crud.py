@@ -55,6 +55,12 @@ def create_book(title, summary, book_cover, author,genres):
     book_author = Author(full_name=author)
     new_book = Book(title=title, summary=summary, book_cover_path=book_cover)
     book_author.books.append(new_book)
+    if genres == None:
+        db.session.add(new_book)
+        db.session.commit()
+
+        return new_book
+
     for genre in genres:
         print(genre)
         book_genres = Genre.query.filter(Genre.name==genre).first()

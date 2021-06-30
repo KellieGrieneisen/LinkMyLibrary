@@ -178,7 +178,10 @@ def add_searched_book():
         author = data['volumeInfo']['authors'][0]
         book_cover = data['volumeInfo']['imageLinks']['thumbnail']
         summary = data['volumeInfo']['description']
-        genres = data['volumeInfo']['categories']
+        if 'categories' in data['volumeInfo']:
+            genres = data['volumeInfo']['categories']
+        else:
+            genres = None
         check_book = crud.get_book_by_title(title)
         search_author= crud.get_author(author)
         if search_author is None:
