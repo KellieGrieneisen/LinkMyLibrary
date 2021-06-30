@@ -61,6 +61,7 @@ h1 {
 }
 
 h2 {
+    color: white;
     margin-top: 5pt;
     text-align: center;
     font-family:fantasy ;
@@ -95,16 +96,19 @@ a {
 nav{
     background-color:rgba(224, 232, 233, 0.8);
     border-style: ridge;
-    margin-left: 90px;
-    margin-right: 90px;
+    /* margin-left: 90px;
+    margin-right: 90px; */
     align-tracks: center;
     text-align: center;
+
     
 }
 
 /* tags to navigate away from user library homepage */
 #navigation {
-    color:indigo;
+    color:rgb(173, 115, 115);
+    text-align: center;
+    margin-right: 100px;
 }
 
 /* genres dropdown menu wrapper */
