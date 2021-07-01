@@ -8,6 +8,7 @@
 /* book results shelf layout */
 #results {
     margin: 3pt;
+    /* height:20px; */
     text-align: center;
     border-bottom: solid;
     border-color: white;
@@ -41,6 +42,12 @@
     margin: 100pt;
     margin-top: 5pt;
     align-tracks: center;
+    object-fit: fill
+    
+}
+
+#shelf img {
+    object-fit: cover;
 }
 
 .col{
@@ -62,7 +69,7 @@ h1 {
 
 h2 {
     color: white;
-    margin-top: 5pt;
+    margin-top: 15pt;
     text-align: center;
     font-family:fantasy ;
     font-weight: bolder;

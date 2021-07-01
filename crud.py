@@ -35,19 +35,14 @@ def add_book_to_user_id(current_user_id,book_id):
 
 def get_genres(books):
     """Query for genres related to users books."""
-    b_gens =[]
+    genre_list =[]
     for book in books:
         genres = book.genres
-        print(genres)
-        print('**********')
-        print(b_gens)
-        print('***************')
         for genre in genres:
             print(genre.genre_id)
-            if genre.name not in b_gens:
-                b_gens.append(genre.name)
-    print(b_gens)
-    return b_gens
+            if genre.name not in genre_list:
+                genre_list.append(genre.name)
+    return sorted(genre_list)
 
 
 def create_book(title, summary, book_cover, author,genres):
