@@ -7,7 +7,7 @@
 {% block body %}
 <style>
    body {
-     background-image: url('/static/img/freestocks-OfaDD5o8hpk-unsplash.jpg');
+     background-image: url('/static/img/cole-keister-xMMh-VFGL9M-unsplash.jpg');
      background-size: 1500px;
    }
  </style>
@@ -15,15 +15,15 @@
 
 
 
-<h2>We Recommend...</h2>
-<h2 class="results" style="font-size: 15px;">select books you wish to add to your library below</h2>
+<h2>Search results for "{{search}}"...</h2>
+<h2 class="instructions" style="font-size: 15px;">select books you wish to add to your library below</h2>
 
 <div class="container" id="shelf">
    <form action="/add-searched-book" class="book-results" method="POST">
    {% if books %}
    
    <button class="btn-sm btn-light submit-button">
-      Add Book(s) to Library</button><br>
+      Click Here to Add Books</button><br>
 
    <div class="row" id="page1">
       <!-- loops through list of books in api response -->
@@ -39,16 +39,12 @@
       {% endif %}
        
 
-      {% if 'title' in book['volumeInfo']%}
+      <!-- {% if 'title' in book['volumeInfo']%}
       <b>Title:</b>  {{book['volumeInfo']['title']}} <br>
-      {% endif %}
+      {% endif %} -->
 
       {% if 'authors' in book['volumeInfo'] %}
          <b>By:</b> {{book['volumeInfo']['authors'][0]}}<br>
-      {% endif %}
-      
-      {% if 'categories' in book['volumeInfo']%}
-         <b>Genres:</b> {{book['volumeInfo']['categories']}}<br>
       {% endif %}
          
          
@@ -84,18 +80,10 @@
 
 
 
-       
-      {% if 'title' in book['volumeInfo']%}
-      <b>Title:</b>  {{book['volumeInfo']['title']}} <br>
-      {% endif %}
-
       {% if 'authors' in book['volumeInfo'] %}
          <b>By:</b> {{book['volumeInfo']['authors'][0]}}<br>
       {% endif %}
-      
-      {% if 'categories' in book['volumeInfo']%}
-         <b>Genres:</b> {{book['volumeInfo']['categories']}}<br>
-      {% endif %}
+
          
          
       {% if 'description' in book['volumeInfo'] %}

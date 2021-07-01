@@ -3,21 +3,21 @@
 {% block head %}
 <style>
   body {
-    background-image: url('/static/img/nathan-dumlao-zUNs99PGDg0-unsplash.jpg');
-    background-size:1300px; 
+    background-image: url('/static/img/cole-keister-xMMh-VFGL9M-unsplash.jpg');
+    background-size:1500px;
   }
 </style>
 {% endblock %}
 
 {% block body %} 
  
-  <h2 class="tbr">~ <u>{{name}}'s TBR</u> ~</h2>
+  <h2 class="tbr">{{name}}'s TBR</h2>
 
   <div class="container" id="shelf">
     <div class="row">
     {% for book in tbr_list %}
       <div class='col-2 col-lg-2 col-md-4 col-sm-4' id="tbr-list">
-        <img src={{book.book_cover_path}}><br>{{book.title}}<br>By: {{book.author}}
+        <img src={{book.book_cover_path}}><br>By: {{book.author}}
       </div>
     {% endfor %}
     </div>

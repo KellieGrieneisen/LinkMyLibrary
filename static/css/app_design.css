@@ -9,34 +9,35 @@
 #results {
     margin: 3pt;
     text-align: center;
-    border: solid;
-    border-style: groove;
+    border-bottom: solid;
+    border-color: white;
     background: rgb(245, 245, 245,0.5);
 }
 
-.results {
-    background-color:rgba(196, 109, 128, 0.3);
+.instructions {
+    background-color:rgba(91, 107, 177, 0.3);
     align-tracks: center;
     display: table; /* keep the background color wrapped tight */
     margin: 0px auto 0px auto;
-
 }
 
 #tbr-list {
     margin: 5pt;
     text-align: center;
-    border: solid;
-    border-style: groove;
+    border-bottom: solid;
+    border-color: white;
     background: rgb(245, 245, 245,0.3);
     font-weight: bold;
     font-size: 15px;
 }
 
+.tbr-add {
+    font-size: 10px;
+}
+
 /* all bookshelfs-> library/tbr/results */
 #shelf {
     width: 900pt;
-    /* margin-left: 120px;
-    margin-right: 100px; */
     margin: 100pt;
     margin-top: 5pt;
     align-tracks: center;
@@ -50,8 +51,7 @@
 .tbr{
     color:whitesmoke;
     font-size: 40px;
-    border: 2px;
-    border-bottom: whitesmoke;
+
 }
 
 h1 { 
@@ -99,13 +99,8 @@ a {
 /* homepage navigation bar */
 nav{
     background-color:rgba(224, 232, 233, 0.8);
-    border-style: ridge;
-    /* margin-left: 90px;
-    margin-right: 90px; */
     align-tracks: center;
     text-align: center;
-
-    
 }
 
 /* tags to navigate away from user library homepage */
@@ -152,6 +147,6 @@ nav{
     margin: 5pt;
     text-align: center;
     border-bottom: solid;
-    border-style:groove;
+    border-color: white;
     background: rgb(245, 245, 245,0.3)
 }

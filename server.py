@@ -150,7 +150,7 @@ def search_for_book():
     response2 = requests.get(url, params=payload2)
     data2=response2.json()
 
-    return render_template("book_search_results.html", books=data['items'], books2=data2['items'])
+    return render_template("book_search_results.html", books=data['items'], books2=data2['items'], search=search)
    
      
    
@@ -212,11 +212,7 @@ def show_library():
     name = crud.get_username_by_email(logged_in_email)
     #call for books only associated with the current user in session
     users_books = crud.get_books_by_email(logged_in_email) 
-    print(type(users_books[2].summary))
-    print('**************')
- 
- 
-    
+
         
     return render_template('user_library.html', name=name, users_books=users_books)
 
@@ -290,7 +286,7 @@ def show_genres_in_library():
 
         response2 = requests.get(url, params=payload2)
         data2=response2.json()
-        return render_template('book_search_results.html',books=data['items'],books2=data2['items'])
+        return render_template('book_search_results.html',books=data['items'],books2=data2['items'], search=search)
 
     return render_template('book-recs.html', book_genres=book_genres)
 
