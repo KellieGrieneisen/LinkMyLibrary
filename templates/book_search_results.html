@@ -21,6 +21,8 @@
 <div class="container" id="shelf">
    <form action="/add-searched-book" class="book-results" method="POST">
    {% if books %}
+   <button class="btn-sm btn-light submit-button">
+      Add Book(s) to Library</button><br>
    <div class="row" id="page1">
       <!-- loops through list of books in api response -->
       {% for book in books %}
@@ -109,7 +111,6 @@
    </div>
 {% endif %}
    
-   <button class="float-left submit-button" >Add Book(s) to Library</button><br>
    </form>  
 </div>  
 {% endblock %}

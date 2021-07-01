@@ -1,15 +1,16 @@
 {% extends 'base.html' %} 
 {% block title %}To Be Read{% endblock %}
+{% block head %}
+<style>
+  body {
+    background-image: url('/static/img/nathan-dumlao-zUNs99PGDg0-unsplash.jpg');
+    background-size:1300px; 
+  }
+</style>
+{% endblock %}
 
 {% block body %} 
-  <style>
-    body {
-      background-image: url('/static/img/nathan-dumlao-zUNs99PGDg0-unsplash.jpg');
-      background-size:100%;
-    }
-  </style>
-
-
+ 
   <h2 class="tbr">~ <u>{{name}}'s TBR</u> ~</h2>
 
   <div class="container" id="shelf">
