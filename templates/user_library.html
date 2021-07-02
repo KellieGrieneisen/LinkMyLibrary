@@ -31,14 +31,19 @@
         <br>
         <span class="d-inline-block" title="Summary" data-bs-toggle="popover" 
          data-bs-html='true'  data-bs-content="{{book.summary}}" >
-          <button class="btn btn-sm btn-light" type="button" ><img src={{book.book_cover_path}}></button>
+          <button class="btn btn-sm btn-light" type="button" ><img class="coverImg" src={{book.book_cover_path}}></button>
         </span>
         <br>
-        By: <i>{{book.author}}</i><br>
+        <i>By: {{book.author}}</i><br>
+
+
 
       
-      <span class="tbr-add">
+      
+      <div class="check-me">
         Have you read this?
+        <span class="check-me-text">Unchecking me adds me to your 'To Be Read'</span>
+      </div>
         <input
           class="read"
           type="checkbox"
@@ -46,7 +51,8 @@
           data-book-id="{{ book.book_id }}"
           {% if book.have_read %}checked{% endif %}
         />
-      </span>
+      
+
     </div>
     {% endfor %}
   {% endif %}

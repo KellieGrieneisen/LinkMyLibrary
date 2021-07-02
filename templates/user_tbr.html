@@ -17,7 +17,7 @@
     <div class="row">
     {% for book in tbr_list %}
       <div class='col-2 col-lg-2 col-md-4 col-sm-4' id="tbr-list">
-        <img src={{book.book_cover_path}}><br>By: {{book.author}}
+        <img class="coverImg" src={{book.book_cover_path}}><br>By: {{book.author}}
       </div>
     {% endfor %}
     </div>

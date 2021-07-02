@@ -21,20 +21,43 @@
     display: table; /* keep the background color wrapped tight */
     margin: 0px auto 0px auto;
 }
-
+/* displays tbr bookshelf */
 #tbr-list {
     margin: 5pt;
     text-align: center;
     border-bottom: solid;
     border-color: white;
     background: rgb(245, 245, 245,0.3);
-    font-weight: bold;
-    font-size: 15px;
+    font-size: 12px;
+}
+/* check box and text for tbr toggle */
+.check-me {
+    font-size: 10px;
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
 }
 
-.tbr-add {
-    font-size: 10px;
-}
+/* next two sets handles hover messages on user library tbr toggle */
+.check-me .check-me-text {
+    visibility: hidden;
+    width: 130px;
+    background-color:midnightblue;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+
+  .check-me:hover .check-me-text {
+    visibility: visible;
+  }
+
+
 
 /* all bookshelfs-> library/tbr/results */
 #shelf {
@@ -46,10 +69,13 @@
     
 }
 
-#shelf img {
-    object-fit: cover;
+/* sets book covers to same width and height for better visuals */
+.coverImg {
+    height: 180px;
+    width: 120px;
 }
 
+/* ??? */
 .col{
 
  margin: 0 auto;
@@ -75,13 +101,15 @@ h2 {
     font-weight: bolder;
 }
 
-
+/* genre recs header */
 p {
+    font-family: fantasy;
     font-size: 30px;
     font-weight:bolder;
     color:white;
 }
 
+/* login divs */
 .boxes {
     color: whitesmoke;
     background-color:rgb(59, 45, 8,0.5);
@@ -89,7 +117,7 @@ p {
   }
 
   /* search page  */
-.addbook {
+.searchbook {
     color: whitesmoke;
     background-color:rgba(52, 68, 57, 0.5);
     align-tracks: center;
@@ -153,6 +181,7 @@ nav{
 #bookbox {
     margin: 5pt;
     text-align: center;
+    font-size: 12px;
     border-bottom: solid;
     border-color: white;
     background: rgb(245, 245, 245,0.3)

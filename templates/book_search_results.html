@@ -31,7 +31,7 @@
       <div class='col-4 col-lg-2 col-md-4 col-sm-6' id="results">
       
       {% if 'imageLinks' in book['volumeInfo']%}
-         <img src={{ book['volumeInfo']['imageLinks']['thumbnail'] }}><br>
+         <img class="coverImg" src={{ book['volumeInfo']['imageLinks']['thumbnail'] }}><br>
       {% endif %}
       <!-- if no thumbnail image available, replace with generic book cover -->
       {% if 'imageLinks' not in book['volumeInfo'] %}
@@ -44,9 +44,8 @@
       {% endif %} -->
 
       {% if 'authors' in book['volumeInfo'] %}
-         <!-- <b>By:</b> {{book['volumeInfo']['authors'][0]}}<br> -->
-      
-      {% if 'description' in book['volumeInfo'] %}
+         
+         {% if 'description' in book['volumeInfo'] %}
        
          <button type="button" class="btn btn-sm btn-light" data-bs-toggle="popover" title="By: {{book['volumeInfo']['authors'][0]}}" 
          data-bs-content="{{book['volumeInfo']['description']}}">
@@ -55,12 +54,16 @@
             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
             </svg>
       
-      </button>
+         </button>
 
-      {% endif %}
+         {% endif %}
       {% endif %}
 
-      <input type="checkbox" name="addbooks" value="{{book['id']}}">
+      <div class="check-me">
+         <input type="checkbox" name="addbooks" value="{{book['id']}}">
+         <span class="check-me-text">selecting me adds me to your library upon clicking the add button</span>
+      </div>
+      
       </div>
    {% endfor %} 
 
@@ -75,7 +78,7 @@
       <div class='col-4 col-lg-2 col-md-4 col-sm-6' id="results">
       
       {% if 'imageLinks' in book['volumeInfo']%}
-         <img src={{ book['volumeInfo']['imageLinks']['thumbnail'] }}><br>
+         <img class="coverImg"  src={{ book['volumeInfo']['imageLinks']['thumbnail'] }}><br>
       {% endif %}
       <!-- if no thumbnail image available, replace with generic book cover -->
       {% if 'imageLinks' not in book['volumeInfo'] %}
@@ -83,20 +86,26 @@
       {% endif %}
 
 
-
       {% if 'authors' in book['volumeInfo'] %}
-         <b>By:</b> {{book['volumeInfo']['authors'][0]}}<br>
+ 
+         {% if 'description' in book['volumeInfo'] %}
+       
+         <button type="button" class="btn btn-sm btn-light" data-bs-toggle="popover" title="By: {{book['volumeInfo']['authors'][0]}}" 
+         data-bs-content="{{book['volumeInfo']['description']}}">
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg>
+      
+         </button>
+
+         {% endif %}
       {% endif %}
 
-         
-         
-      {% if 'description' in book['volumeInfo'] %}
-
-         <button type="button" class="btn btn-sm btn-light" data-bs-toggle="popover" title="Summary" 
-         data-bs-content="{{book['volumeInfo']['description']}}">Summary</button>
-      {% endif %}<br>
-
-      <input type="checkbox" name="addbooks" value="{{book['id']}}">
+      <div class="check-me">
+         <input type="checkbox" name="addbooks" value="{{book['id']}}">
+         <span class="check-me-text">selecting me adds me to your library upon clicking the add button</span>
+      </div>
 
       </div>
    {% endfor %} 
