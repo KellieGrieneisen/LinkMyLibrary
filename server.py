@@ -187,13 +187,17 @@ def add_searched_book():
         if search_author is None:
             new_author= crud.create_author(author)
             print(new_author)
-        if check_book:
-            flash("You already have this book!")
-        else:
+        if not check_book:
             new_book= crud.create_book(title, summary, book_cover, author,genres)
             book_id = new_book.book_id
             crud.add_book_to_user_id(current_user_id,book_id)
             print(new_book)
+
+        for user in check_book.user:
+            if user.email == logged_in_email:
+                flash("You already have this book!")
+            else:
+                crud.add_book_to_user_id(current_user_id,check_book.book_id)
         
  
    

@@ -90,23 +90,33 @@
 h1 { 
     
     color: white;
-    font-family:fantasy ;   
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;   
 }
 
 h2 {
     color: white;
     margin-top: 15pt;
     text-align: center;
-    font-family:fantasy ;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: bolder;
 }
 
 /* genre recs header */
 p {
-    font-family: fantasy;
-    font-size: 30px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+}
+p .header {
+    margin-top: 110px;
+    margin-left: 280px;
     font-weight:bolder;
     color:white;
+    font-size: 40px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-color:rgba(145, 63, 94, 0.3);
+    align-tracks: center;
+    display: table; /* keep the background color wrapped tight */
+    margin: 0px auto 0px auto;
 }
 
 /* login divs */
@@ -122,10 +132,22 @@ p {
     background-color:rgba(52, 68, 57, 0.5);
     align-tracks: center;
     display: table; /* keep the background color wrapped tight */
-    margin: 0px auto 0px auto;
+    margin: 50px auto 0px auto;
 
   }
 
+#searchbar {
+    margin-top: 45px;
+    margin-left: 260px;
+    width:600px;
+    height:30px;
+    align-tracks: center;
+}  
+
+.search .btn{
+    margin-top: 15px;
+    margin-left: 740px;
+} 
 /* tags to navigate to user library */
 a {
     color:wheat;
@@ -150,12 +172,15 @@ nav{
     width:200px;
     padding:2px;
     height: 800px;
+    margin-left: 300px;
     }
 
 /* book search header */
 #searchform {
     text-align: left;
-    margin: 40px;
+    margin-top: 150px;
+    margin-left: 40px;
+    margin-right: 40px;
     color: whitesmoke;
 
 }
