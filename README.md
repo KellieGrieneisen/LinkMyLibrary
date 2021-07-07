@@ -113,7 +113,7 @@ Source your key from your <i>secrets.sh</i> file into your virtual env:
 Create your database(db):
 <pre>
   <code>createdb library</code>
-  <code>python3 model.py
+  <code>python3 -i model.py
        >>db.create_all()</code>
 </pre>
 Run the application:
