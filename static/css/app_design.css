@@ -106,7 +106,7 @@ p {
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 
 }
-p .header {
+.header {
     margin-top: 110px;
     margin-left: 280px;
     font-weight:bolder;

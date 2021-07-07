@@ -17,10 +17,10 @@ app.jinja_env.undefined = StrictUndefined
 os.system("source ./projectInfo/secrets.sh") 
 API_KEY = os.environ['GOOGLEBOOKS_API_KEY']
 
+# def create_all():
+#     db.create_all()
 
 
-def create_all():
-    db.create_all()
 
 @app.route('/login', methods=["GET"])
 def login():
@@ -192,15 +192,13 @@ def add_searched_book():
             book_id = new_book.book_id
             crud.add_book_to_user_id(current_user_id,book_id)
             print(new_book)
-
-        for user in check_book.user:
-            if user.email == logged_in_email:
-                flash("You already have this book!")
-            else:
-                crud.add_book_to_user_id(current_user_id,check_book.book_id)
+        else:
+            for user in check_book.user:
+                if user.email == logged_in_email:
+                    flash("You already have this book!")
+                else:
+                    crud.add_book_to_user_id(current_user_id,check_book.book_id)
         
- 
-   
     return redirect('/find-book')
 
 
