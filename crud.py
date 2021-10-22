@@ -57,10 +57,10 @@ def create_book(title, summary, book_cover, author,genres):
         return new_book
 
     for genre in genres:
-        print(genre)
+        # print(genre)
         book_genres = Genre.query.filter(Genre.name==genre).first()
-        print('***************')
-        print(book_genres)
+        # print('***************')
+        # print(book_genres)
         if book_genres is None:
             new_genres = Genre(name=genre)
             new_genres.books.append(new_book)
